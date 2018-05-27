@@ -26,4 +26,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function accounts() {
+        return $this->hasMany(Account::class, 'user_id');
+    }
+
+    public function records() {
+        return $this->hasManyThrough(Record::class, Account::class, 'user_id', 'account_id');
+    }
 }

@@ -25,6 +25,7 @@ class CreateAccountsTable extends Migration
             $table->boolean('is_template')
                 ->default(false);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('user_id')
                 ->references('id')

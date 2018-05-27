@@ -20,8 +20,9 @@ class CreateRecordsTable extends Migration
             $table->unsignedInteger('price');
             $table->unsignedInteger('total_shares');
             $table->unsignedInteger('broker_fee');
-            $table->enum('action', ['buy', 'sell']);
+            $table->enum('action', ['BUY', 'SELL']);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('account_id')
                 ->references('id')

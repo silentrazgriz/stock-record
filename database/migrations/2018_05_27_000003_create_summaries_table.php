@@ -27,6 +27,7 @@ class CreateSummariesTable extends Migration
             $table->decimal('foreign_buy', 20, 1);
             $table->decimal('foreign_sell', 20, 1);
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('quote_id')
                 ->references('id')

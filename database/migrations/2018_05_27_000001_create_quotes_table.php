@@ -30,6 +30,7 @@ class CreateQuotesTable extends Migration
             $table->string('name');
             $table->timestamp('listing_date');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 
