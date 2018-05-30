@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Repositories\User\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
+    private $userRepository;
+
+    public function __construct(UserRepository $userRepository)
+    {
+        $this->userRepository = $userRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +22,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->userRepository->all();
     }
 
     /**
@@ -35,7 +33,7 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->userRepository->create($request->all());
     }
 
     /**
@@ -46,18 +44,7 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->userRepository->findById($id);
     }
 
     /**
@@ -69,7 +56,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->userRepository->update($id, $request->all());
     }
 
     /**
@@ -80,6 +67,6 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->userRepository->destroy($id);
     }
 }

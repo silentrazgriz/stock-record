@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Repositories\Summary\SummaryRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class SummaryController extends Controller
 {
+    private $summaryRepository;
+
+    public function __construct(SummaryRepository $summaryRepository)
+    {
+        $this->summaryRepository = $summaryRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +22,7 @@ class SummaryController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->summaryRepository->all();
     }
 
     /**
@@ -35,7 +33,7 @@ class SummaryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->summaryRepository->create($request->all());
     }
 
     /**
@@ -46,18 +44,7 @@ class SummaryController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->summaryRepository->findById($id);
     }
 
     /**
@@ -69,7 +56,7 @@ class SummaryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->summaryRepository->update($id, $request->all());
     }
 
     /**
@@ -80,6 +67,6 @@ class SummaryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->summaryRepository->destroy($id);
     }
 }

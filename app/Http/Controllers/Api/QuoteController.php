@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Repositories\Quote\QuoteRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class QuoteController extends Controller
 {
+    private $quoteRepository;
+
+    public function __construct(QuoteRepository $quoteRepository)
+    {
+        $this->quoteRepository = $quoteRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +22,7 @@ class QuoteController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->quoteRepository->all();
     }
 
     /**
@@ -35,7 +33,7 @@ class QuoteController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->quoteRepository->create($request->all());
     }
 
     /**
@@ -46,18 +44,7 @@ class QuoteController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->quoteRepository->findById($id);
     }
 
     /**
@@ -69,7 +56,7 @@ class QuoteController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->quoteRepository->update($id, $request->all());
     }
 
     /**
@@ -80,6 +67,6 @@ class QuoteController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->quoteRepository->destroy($id);
     }
 }

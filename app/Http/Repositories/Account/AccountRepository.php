@@ -1,36 +1,47 @@
 <?php
 
 
-namespace App\Http\Middleware\Account;
+namespace App\Http\Repositories\Account;
 
 
 use App\Http\Repositories\Repository;
+use App\Models\Account;
 
 class AccountRepository implements Repository
 {
+    private $account;
+
+    public function __construct()
+    {
+        $this->account = new Account();
+    }
+
     public function all()
     {
-        // TODO: Implement all() method.
+        return $this->account->get()
+            ->toArray();
     }
 
     public function findById($id)
     {
-        // TODO: Implement findById() method.
+        return $this->account->find($id);
     }
 
     public function create(array $params)
     {
-        // TODO: Implement create() method.
+        return $this->account->create($params);
     }
 
     public function update($id, array $params)
     {
-        // TODO: Implement update() method.
+        return $this->account->find($id)
+            ->update($params);
     }
 
     public function destroy($id)
     {
-        // TODO: Implement destroy() method.
+        $account = $this->account->find($id);
+        return $account->delete();
     }
 
 }

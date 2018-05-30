@@ -2,11 +2,19 @@
 
 namespace App\Http\Controllers\Api;
 
+use App\Http\Repositories\Account\AccountRepository;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
 class AccountController extends Controller
 {
+    private $accountRepository;
+
+    public function __construct(AccountRepository $accountRepository)
+    {
+        $this->accountRepository = $accountRepository;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -14,17 +22,7 @@ class AccountController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        return $this->accountRepository->all();
     }
 
     /**
@@ -35,7 +33,7 @@ class AccountController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        return $this->accountRepository->create($request->all());
     }
 
     /**
@@ -46,18 +44,7 @@ class AccountController extends Controller
      */
     public function show($id)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+        return $this->accountRepository->findById($id);
     }
 
     /**
@@ -69,7 +56,7 @@ class AccountController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        return $this->accountRepository->update($id, $request->all());
     }
 
     /**
@@ -80,6 +67,6 @@ class AccountController extends Controller
      */
     public function destroy($id)
     {
-        //
+        return $this->accountRepository->destroy($id);
     }
 }

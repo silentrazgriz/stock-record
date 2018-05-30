@@ -5,32 +5,43 @@ namespace App\Http\Repositories\Record;
 
 
 use App\Http\Repositories\Repository;
+use App\Models\Record;
 
 class RecordRepository implements Repository
 {
+    private $record;
+
+    public function __construct()
+    {
+        $this->record = new Record();
+    }
+
     public function all()
     {
-        // TODO: Implement all() method.
+        return $this->record->get()
+            ->toArray();
     }
 
     public function findById($id)
     {
-        // TODO: Implement findById() method.
+        return $this->record->find($id);
     }
 
     public function create(array $params)
     {
-        // TODO: Implement create() method.
+        return $this->record->create($params);
     }
 
     public function update($id, array $params)
     {
-        // TODO: Implement update() method.
+        return $this->record->find($id)
+            ->update($params);
     }
 
     public function destroy($id)
     {
-        // TODO: Implement destroy() method.
+        $record = $this->record->find($id);
+        return $record->delete();
     }
 
 }

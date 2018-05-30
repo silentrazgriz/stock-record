@@ -5,32 +5,43 @@ namespace App\Http\Repositories\User;
 
 
 use App\Http\Repositories\Repository;
+use App\Models\User;
 
 class UserRepository implements Repository
 {
+    private $user;
+
+    public function __construct()
+    {
+        $this->user = new User();
+    }
+
     public function all()
     {
-        // TODO: Implement all() method.
+        return $this->user->get()
+            ->toArray();
     }
 
     public function findById($id)
     {
-        // TODO: Implement findById() method.
+        return $this->user->find($id);
     }
 
     public function create(array $params)
     {
-        // TODO: Implement create() method.
+        return $this->user->create($params);
     }
 
     public function update($id, array $params)
     {
-        // TODO: Implement update() method.
+        return $this->user->find($id)
+            ->update($params);
     }
 
     public function destroy($id)
     {
-        // TODO: Implement destroy() method.
+        $user = $this->user->find($id);
+        return $user->delete();
     }
 
 }
