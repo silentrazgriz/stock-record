@@ -18,6 +18,9 @@ Route::middleware('auth:api')->group(function () {
     Route::prefix('users')->group(function () {
         Route::get('me', 'UserController@me');
     });
+    Route::resource('quotes', 'QuoteController');
+    Route::resource('accounts', 'AccountController');
+    Route::resource('records', 'RecordController');
 });
 
 Route::post('register', 'UserController@register');

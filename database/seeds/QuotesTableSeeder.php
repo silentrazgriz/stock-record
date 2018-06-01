@@ -13,43 +13,29 @@ class QuotesTableSeeder extends Seeder
      */
     public function run()
     {
-        $sectors = [
-            "AGRI",
-            "BASIC-IND",
-            "CONSUMER",
-            "FINANCE",
-            "INFRASTRUCT",
-            "MINING",
-            "MISC-IND",
-            "PROPERTY",
-            "TRADE"
-        ];
-
-        $customDate = [
-            'BNBA' => '2006-06-01T00:00:00',
-            'BRIS' => '2018-05-09T00:00:00',
-            'SCBD' => '2002-04-19T00:00:00',
-            'PANR' => '2001-09-18T00:00:00'
-        ];
-
         $client = new Client();
-        foreach ($sectors as $sector) {
-            $response = $client->request('GET', $this->getStockUrl($sector));
-            $json = json_decode($response->getBody());
-            $inserted = [];
-            foreach ($json->data as $data) {
-                $inserted[] = [
-                    'sector' => $sector,
-                    'code' => $data->Code,
-                    'name' => $data->Name,
-                    'listing_date' => date('Y-m-d H:i:s', strtotime(isset($customDate[$data->Code]) ? $customDate[$data->Code] : $data->ListingDate)),
-                ];
-            }
-            DB::table('quotes')->insert($inserted);
+        $response = $client->request('GET', $this->getSummaryUrl());
+        $json = json_decode($response->getBody());
+        $inserted = [];
+        foreach ($json->data as $data) {
+            $inserted[] = [
+                'code' => $data->StockCode,
+                'name' => $data->StockName,
+                'previous' => $data->Previous,
+                'close' => $data->Close,
+                'low' => $data->Low == 0 ? $data->Close : $data->Low,
+                'high' => $data->High == 0 ? $data->Close : $data->High,
+                'change' => $data->Change,
+                'listed_shares' => $data->ListedShares,
+                'volume' => $data->Volume,
+                'foreign_buy' => $data->ForeignBuy,
+                'foreign_sell' => $data->ForeignSell
+            ];
         }
+        DB::table('quotes')->insert($inserted);
     }
 
-    public function getStockUrl($sector, $length = 150) {
-        return 'http://www.idx.co.id/umbraco/Surface/StockData/GetSecuritiesStock?code=&sector=' . $sector . '&board=&draw=6&start=0&length=' . $length;
+    public function getSummaryUrl() {
+        return 'http://www.idx.co.id/umbraco/Surface/TradingSummary/GetStockSummary?draw=1&start=0&length=590';
     }
 }

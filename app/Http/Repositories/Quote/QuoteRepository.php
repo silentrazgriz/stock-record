@@ -16,10 +16,13 @@ class QuoteRepository implements Repository
         $this->quote = new Quote();
     }
 
-    public function all()
+    public function all($orderBy = '')
     {
-        return $this->quote->get()
-            ->toArray();
+        $result = $this->quote;
+        if (!empty($orderBy)) {
+            $result->orderBy($orderBy);
+        }
+        return $result->get()->toArray();
     }
 
     public function findById($id)

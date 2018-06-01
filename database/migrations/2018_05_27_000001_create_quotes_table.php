@@ -15,20 +15,17 @@ class CreateQuotesTable extends Migration
     {
         Schema::create('quotes', function (Blueprint $table) {
             $table->increments('id');
-            $table->enum('sector', [
-                'AGRI',
-                'BASIC-IND',
-                'CONSUMER',
-                'FINANCE',
-                'INFRASTRUCT',
-                'MINING',
-                'MISC-IND',
-                'PROPERTY',
-                'TRADE'
-            ]);
             $table->string('code');
             $table->string('name');
-            $table->timestamp('listing_date');
+            $table->unsignedInteger('previous');
+            $table->unsignedInteger('close');
+            $table->unsignedInteger('low');
+            $table->unsignedInteger('high');
+            $table->integer('change');
+            $table->decimal('listed_shares', 20, 1);
+            $table->decimal('volume', 20, 1);
+            $table->decimal('foreign_buy', 20, 1);
+            $table->decimal('foreign_sell', 20, 1);
             $table->timestamps();
             $table->softDeletes();
         });
