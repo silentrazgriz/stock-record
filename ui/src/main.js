@@ -1,19 +1,21 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 
+import App from './App.vue';
+import Home from './pages/Home.vue';
+import Login from './pages/Login.vue';
+
 Vue.use(VueRouter);
 
 const routes = [
     {
         path: '/',
-        component: Vue.component('App', require('./App.vue')),
-        children: [
-            {
-                path: 'login',
-                component: Vue.component('Login', require('./pages/LoginPage.vue'))
-            }
-        ]
+        component: Home
     },
+    {
+        path: '/login',
+        component: Login
+    }
 ];
 
 const router = new VueRouter({
@@ -23,5 +25,6 @@ const router = new VueRouter({
 });
 
 const app = new Vue({
-    router
+    router,
+    render: h => h(App)
 }).$mount('#app');
