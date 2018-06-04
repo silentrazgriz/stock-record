@@ -19,10 +19,12 @@
 </template>
 
 <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        let elems = document.querySelectorAll('.sidenav');
-        let instances = M.Sidenav.init(elems);
-    });
+    export default {
+        mounted() {
+            let elems = document.querySelectorAll('.sidenav');
+            M.Sidenav.init(elems);
+        }
+    }
 </script>
 
 <style lang="scss">

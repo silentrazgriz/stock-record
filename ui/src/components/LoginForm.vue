@@ -1,6 +1,6 @@
 <template>
     <div id="login-form" class="row">
-        <form class="col s12">
+        <form class="col s12" @submit.prevent="login">
             <div class="row">
                 <div class="input-field col s12">
                     <i class="material-icons prefix">email</i>
@@ -29,8 +29,6 @@
 </template>
 
 <script>
-    import axios from 'axios';
-
     export default {
         data() {
             return {
@@ -39,6 +37,23 @@
                     password: ''
                 }
             };
+        },
+        methods: {
+            login() {
+                const payload = {
+                    user: {
+                        username: this.credentials.username,
+                        password: this.credentials.password
+                    },
+                    vue: this
+                };
+                console.log(this.$axios);
+                console.log(this.axios);
+                this.$store.dispatch('auth/login', payload)
+                    .then((result) => {
+                        this.$router.push('/');
+                    });
+            }
         }
     }
 </script>
