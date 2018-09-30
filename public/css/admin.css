@@ -1,0 +1,41 @@
+.sidebar-nav .nav i.fas,
+.sidebar-nav .nav i.far {
+    width: 25px;
+}
+
+.sidebar-minimized .sidebar-nav .nav i.fas,
+.sidebar-minimized .sidebar-nav .nav i.far {
+    width: 50px;
+    text-align: center;
+    margin-right: 5px;
+}
+
+.sidebar-minimized .sidebar-nav .nav .nav-dropdown-items i.fas,
+.sidebar-minimized .sidebar-nav .nav .nav-dropdown-items i.far {
+    width: 35px;
+    padding-left: 10px;
+}
+
+.nav-dropdown-items .nav-item a {
+    padding-left: 25px;
+}
+
+#logout-form button[type=submit] {
+    outline: 0;
+    border: 0;
+    text-align: left;
+    width: 100%;
+}
+
+.table tbody .action .btn {
+    color: white;
+}
+
+.table tbody .action .btn i {
+    margin-right: 3px;
+    text-align: center;
+}
+
+.table thead th.action {
+    width: 200px;
+}

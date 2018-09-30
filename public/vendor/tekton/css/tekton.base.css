@@ -1,0 +1,56 @@
+.tekton-image-preview {
+    width: auto;
+    height: 150px;
+    display: none;
+}
+
+.tekton-image-preview.tekton-show-preview {
+    display: block;
+}
+
+.tekton-image-preview img {
+    height: 100%;
+    object-fit: cover;
+}
+
+.tekton-image-upload:hover {
+    cursor: pointer;
+}
+
+/* Flatpickr Modification */
+.flatpickr-months .flatpickr-month {
+    height: 50px;
+}
+
+.flatpickr-current-month {
+    line-height: 2.5;
+}
+
+.flatpickr-months .flatpickr-prev-month,
+.flatpickr-months .flatpickr-next-month {
+    top: 8px;
+}
+
+.flatpickr-months .flatpickr-prev-month {
+    left: 15px !important;
+}
+
+.flatpickr-months .flatpickr-next-month {
+    right: 15px !important;
+}
+
+.flatpickr-calendar {
+    width: auto;
+    padding: 0 15px 15px;
+}
+
+/* Bootstrap Modification */
+.custom-control-label:after,
+.custom-control-label:before {
+    top: .2rem;
+}
+
+.was-validated .form-control:valid~.hint,
+.was-validated .form-control:invalid~.hint {
+    display: none;
+}

@@ -150,6 +150,7 @@ return [
         /*
          * Package Service Providers...
          */
+        Gaia\Tekton\TektonServiceProvider::class,
 
         /*
          * Application Service Providers...

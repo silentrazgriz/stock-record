@@ -2,9 +2,15 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Forms\LoginForm;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
 
+/**
+ * Class LoginController
+ * @package App\Http\Controllers\Auth
+ */
 class LoginController extends Controller
 {
     /*
@@ -25,7 +31,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -35,5 +41,55 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+        $this->redirectTo = route('root');
+    }
+
+    /**
+     * @return mixed
+     */
+    public function showLoginForm()
+    {
+        $loginForm = new LoginForm();
+        return $loginForm->render();
+    }
+
+    /**
+     * Validate the user login request.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return void
+     */
+    protected function validateLogin(Request $request)
+    {
+        $this->validate($request, [
+            $this->username() => 'required|string',
+            'password' => 'required|string',
+        ]);
+    }
+
+    /**
+     * @param Request $request
+     * @return bool
+     */
+    protected function attemptLogin(Request $request)
+    {
+        $byEmail = [
+            'email' => $request->get('login_id'),
+            'password' => $request->get('password')
+        ];
+        $byLoginId = [
+            'login_id' => $request->get('login_id'),
+            'password' => $request->get('password')
+        ];
+
+        $result = $this->guard()->attempt($byEmail, $request->filled('remember')) ||
+            $this->guard()->attempt($byLoginId, $request->filled('remember'));
+
+        return $result;
+    }
+
+    public function username()
+    {
+        return 'login_id';
     }
 }

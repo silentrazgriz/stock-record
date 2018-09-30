@@ -36,6 +36,6 @@ class QuotesTableSeeder extends Seeder
     }
 
     public function getSummaryUrl() {
-        return 'http://www.idx.co.id/umbraco/Surface/TradingSummary/GetStockSummary?draw=1&start=0&length=590';
+        return 'http://www.idx.co.id/umbraco/Surface/TradingSummary/GetStockSummary?draw=1&start=0&length=700';
     }
 }
