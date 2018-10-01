@@ -481,12 +481,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silentrazgriz/tekton.git",
-                "reference": "b0229c22ecdab3618c2724584cc08c975ee09e06"
+                "reference": "b266d163e33a2d129e6219ecc933a55313f7fa01"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silentrazgriz/tekton/zipball/b0229c22ecdab3618c2724584cc08c975ee09e06",
-                "reference": "b0229c22ecdab3618c2724584cc08c975ee09e06",
+                "url": "https://api.github.com/repos/silentrazgriz/tekton/zipball/b266d163e33a2d129e6219ecc933a55313f7fa01",
+                "reference": "b266d163e33a2d129e6219ecc933a55313f7fa01",
                 "shasum": ""
             },
             "type": "library",
@@ -513,7 +513,7 @@
                 }
             ],
             "description": "Form builder package for laravel",
-            "time": "2018-09-30 13:07:22"
+            "time": "2018-10-01 03:12:15"
         },
         {
             "name": "guzzlehttp/guzzle",

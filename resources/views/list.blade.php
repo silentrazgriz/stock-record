@@ -76,11 +76,22 @@
                                                    class="btn btn-sm btn-info"><i class="fas fa-edit"></i> Edit</a>
                                             @endif
                                             @if($options['actions']['destroy'])
-                                                <a href="{{ route($options['route'] . '.destroy', $collection['id']) }}"
-                                                   class="btn btn-sm btn-danger"><i class="far fa-trash-alt"></i>
-                                                    Destroy</a>
+                                                <a
+                                                        class="btn btn-sm btn-danger delete-item"
+                                                        data-target="#delete-{{ $collection['id'] }}"
+                                                ><i class="far fa-trash-alt"></i> Destroy</a>
                                             @endif
                                         </div>
+                                        @if($options['actions']['destroy'])
+                                            <form
+                                                    method="POST"
+                                                    action="{{ route($options['route'] . '.destroy', $collection['id']) }}"
+                                                    id="delete-{{ $collection['id'] }}"
+                                            >
+                                                @csrf
+                                                <input type="hidden" name="_method" value="DELETE"/>
+                                            </form>
+                                        @endif
                                     </td>
                                 @endif
                             </tr>
@@ -97,3 +108,15 @@
         </div>
     </div>
 @endsection
+
+@section('scripts')
+    <script src="{{ asset('vendor/sizzle/sizzle.min.js') }}"></script>
+    <script>
+        Sizzle('.delete-item').forEach((item) => {
+            item.addEventListener('click', (e) => {
+                let target = item.dataset.target;
+                Sizzle(target)[0].submit();
+            });
+        });
+    </script>
+@append
