@@ -76,16 +76,16 @@
                                             @endif
                                             @if($options['actions']['destroy'])
                                                 <a
-                                                        class="btn btn-sm btn-danger delete-item"
-                                                        data-target="#delete-{{ $collection['id'] }}"
+                                                    class="btn btn-sm btn-danger delete-item"
+                                                    data-target="#delete-{{ $collection['id'] }}"
                                                 ><i class="far fa-trash-alt"></i> Destroy</a>
                                             @endif
                                         </div>
                                         @if($options['actions']['destroy'])
                                             <form
-                                                    method="POST"
-                                                    action="{{ route($options['route'] . '.destroy', $collection['id']) }}"
-                                                    id="delete-{{ $collection['id'] }}"
+                                                method="POST"
+                                                action="{{ route($options['route'] . '.destroy', $collection['id']) }}"
+                                                id="delete-{{ $collection['id'] }}"
                                             >
                                                 @csrf
                                                 <input type="hidden" name="_method" value="DELETE"/>

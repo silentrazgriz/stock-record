@@ -9,6 +9,7 @@ namespace App\Forms\Record;
 use App\Component\Value\RecordType;
 use App\Data\Quote\QuoteRepository;
 use App\Data\UserAccount\UserAccountRepository;
+use Carbon\Carbon;
 use Gaia\Tekton\component\ChoiceValueParser;
 use Gaia\Tekton\Component\Form;
 use Gaia\Tekton\Component\Value\ButtonPlacement;
@@ -78,6 +79,9 @@ class CreateRecordForm extends Form
 
         $this->addField('user_account_id', 'Account', FieldType::SELECT)
             ->setChoiceValues(ChoiceValueParser::parse($userAccounts, 'name', 'id'));
+
+        $this->addField('transaction_date', 'Transaction Date', FieldType::DATE)
+            ->setDefaultValue(Carbon::now()->toDateString());
 
         $this->addField('type', 'Transaction Type', FieldType::SELECT)
             ->setChoiceValues([

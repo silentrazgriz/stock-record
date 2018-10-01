@@ -11,6 +11,6 @@ class Record extends Model
     use BelongsToQuoteTrait, BelongsToUserAccountTrait;
 
     protected $fillable = [
-        'user_account_id', 'quote_id', 'price', 'total_shares', 'broker_fee', 'type'
+        'user_account_id', 'quote_id', 'price', 'total_shares', 'broker_fee', 'type', 'transaction_date'
     ];
 }
