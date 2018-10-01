@@ -15,12 +15,12 @@ class RecordList extends CollectionRenderer
         parent::__construct(
             'Your Transaction Records',
             [
-                ['key' => 'quote.code', 'type' => 'text'],
-                ['key' => 'type', 'type' => 'text'],
-                ['key' => 'price', 'type' => 'number'],
-                ['key' => 'total_shares', 'type' => 'number'],
-                ['key' => 'sub_total', 'type' => 'number'],
-                ['key' => 'broker_fee', 'type' => 'number'],
+                ['key' => 'quote.code', 'label' => 'Stock', 'type' => 'text'],
+                ['key' => 'type', 'label' => 'Type', 'type' => 'text'],
+                ['key' => 'price', 'label' => 'Price', 'type' => 'number'],
+                ['key' => 'total_shares', 'label' => 'Shares', 'type' => 'number'],
+                ['key' => 'sub_total', 'label' => 'Sub Total', 'type' => 'number'],
+                ['key' => 'broker_fee', 'label' => 'Fee', 'type' => 'number'],
             ],
             [
                 'actions' => [

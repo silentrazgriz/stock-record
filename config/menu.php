@@ -32,18 +32,6 @@ return [
         ],
         [
             'type' => 'link',
-            'text' => 'Quote',
-            'icon' => 'fas fa-file-alt',
-            'route' => 'quotes.index'
-        ],
-        [
-            'type' => 'link',
-            'text' => 'Broker Account',
-            'icon' => 'fas fa-cube',
-            'route' => 'broker-accounts.index'
-        ],
-        [
-            'type' => 'link',
             'text' => 'Your Accounts',
             'icon' => 'fas fa-users',
             'route' => 'user-accounts.index'
@@ -53,6 +41,18 @@ return [
             'text' => 'Transaction',
             'icon' => 'fas fa-exchange-alt',
             'route' => 'records.index'
+        ],
+        [
+            'type' => 'link',
+            'text' => 'Quote',
+            'icon' => 'fas fa-file-alt',
+            'route' => 'quotes.index'
+        ],
+        [
+            'type' => 'link',
+            'text' => 'Broker Account',
+            'icon' => 'fas fa-cube',
+            'route' => 'broker-accounts.index'
         ],
         [
             'type' => 'logout',

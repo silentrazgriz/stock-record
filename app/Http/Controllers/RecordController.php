@@ -83,7 +83,7 @@ class RecordController extends Controller
      */
     public function edit($id)
     {
-        $updateForm = new UpdateRecordForm($this->userAccountRepository, $this->quoteRepository);
+        $updateForm = new UpdateRecordForm($this->userAccountRepository, $this->quoteRepository, $id);
         $updateForm->setDefaultValues($this->recordRepository->findById($id)->toArray());
 
         return $updateForm->render();

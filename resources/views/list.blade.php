@@ -24,8 +24,7 @@
                         <thead>
                         <tr>
                             @foreach($chiron['fields'] as $field)
-                                @php($colTitleParts = explode('.', $field['key']))
-                                @php($colTitle = ucwords(str_replace('_', ' ', end($colTitleParts))))
+                                @php($colTitle = ucwords($field['label']))
                                 @if($field['type'] == 'number' || $field['type'] == 'float')
                                     <th class="text-right" scope="col">{{ $colTitle }}</th>
                                 @else

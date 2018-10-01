@@ -12,6 +12,10 @@ use Gaia\Tekton\Component\Form;
 use Gaia\Tekton\Component\Value\ButtonPlacement;
 use Gaia\Tekton\Component\Value\FieldType;
 
+/**
+ * Class UpdateUserAccountForm
+ * @package App\Forms\UserAccount
+ */
 class UpdateUserAccountForm extends Form
 {
     /**
@@ -20,15 +24,17 @@ class UpdateUserAccountForm extends Form
     private $brokerAccountRepository;
 
     /**
-     * CreateUserAccountForm constructor.
+     * UpdateUserAccountForm constructor.
      * @param BrokerAccountRepository $brokerAccountRepository
+     * @param $id
      */
     public function __construct(
-        BrokerAccountRepository $brokerAccountRepository
+        BrokerAccountRepository $brokerAccountRepository,
+        $id
     ) {
         parent::__construct(
-            'POST',
-            '/user-accounts',
+            'PUT',
+            '/user-accounts/' . $id,
             'user-account-form',
             'Add Account',
             [

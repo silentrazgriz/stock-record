@@ -75,7 +75,7 @@ class BrokerAccountController extends Controller
     {
         $brokerAccount = $this->brokerAccountRepository->findById($id)->toArray();
 
-        $updateForm = new UpdateBrokerAccountForm();
+        $updateForm = new UpdateBrokerAccountForm($id);
         $updateForm->setDefaultValues($brokerAccount);
 
         return $updateForm->render();

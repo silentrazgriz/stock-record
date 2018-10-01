@@ -15,11 +15,11 @@ class UserAccountList extends CollectionRenderer
         parent::__construct(
             'Your Accounts',
             [
-                ['key' => 'broker_account.code', 'type' => 'text'],
-                ['key' => 'name', 'type' => 'text'],
-                ['key' => 'broker_account.buy_commission', 'type' => 'float'],
-                ['key' => 'broker_account.sell_commission', 'type' => 'float'],
-                ['key' => 'broker_account.margin_interest', 'type' => 'float'],
+                ['key' => 'broker_account.code', 'label' => 'Broker Code', 'type' => 'text'],
+                ['key' => 'name', 'label' => 'Account ID', 'type' => 'text'],
+                ['key' => 'broker_account.buy_commission', 'label' => 'Buy Fee', 'type' => 'float'],
+                ['key' => 'broker_account.sell_commission', 'label' => 'Sell Fee', 'type' => 'float'],
+                ['key' => 'broker_account.margin_interest', 'label' => 'Margin Fee', 'type' => 'float'],
             ],
             [
                 'actions' => [

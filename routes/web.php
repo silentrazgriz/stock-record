@@ -19,5 +19,4 @@ Route::resource('broker-accounts', 'BrokerAccountController');
 Route::resource('user-accounts', 'UserAccountController');
 Route::resource('quotes', 'QuoteController')
     ->only(['index']);
-Route::resource('records', 'RecordController')
-    ->except(['show']);
+Route::resource('records', 'RecordController');

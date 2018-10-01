@@ -15,13 +15,14 @@ class QuoteList extends CollectionRenderer
         parent::__construct(
             'All Quotes',
             [
-                ['key' => 'code', 'type' => 'text'],
-                ['key' => 'name', 'type' => 'text'],
-                ['key' => 'previous', 'type' => 'number'],
-                ['key' => 'close', 'type' => 'number'],
-                ['key' => 'low', 'type' => 'number'],
-                ['key' => 'high', 'type' => 'number'],
-                ['key' => 'change', 'type' => 'number'],
+                ['key' => 'code', 'label' => 'Stock', 'type' => 'text'],
+                ['key' => 'name', 'label' => 'Name', 'type' => 'text'],
+                ['key' => 'previous', 'label' => 'Prev', 'type' => 'number'],
+                ['key' => 'close', 'label' => 'Close', 'type' => 'number'],
+                ['key' => 'low', 'label' => 'Low', 'type' => 'number'],
+                ['key' => 'high', 'label' => 'High', 'type' => 'number'],
+                ['key' => 'change', 'label' => 'Change', 'type' => 'number'],
+                ['key' => 'volume', 'label' => 'Volume', 'type' => 'number'],
             ],
             [
                 'actions' => [

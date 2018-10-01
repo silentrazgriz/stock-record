@@ -15,6 +15,10 @@ use Gaia\Tekton\Component\Value\ButtonPlacement;
 use Gaia\Tekton\Component\Value\FieldType;
 use Auth;
 
+/**
+ * Class UpdateRecordForm
+ * @package App\Forms\Record
+ */
 class UpdateRecordForm extends Form
 {
     /**
@@ -31,14 +35,16 @@ class UpdateRecordForm extends Form
      * UpdateRecordForm constructor.
      * @param UserAccountRepository $userAccountRepository
      * @param QuoteRepository $quoteRepository
+     * @param $id
      */
     public function __construct(
         UserAccountRepository $userAccountRepository,
-        QuoteRepository $quoteRepository
+        QuoteRepository $quoteRepository,
+        $id
     ) {
         parent::__construct(
-            'POST',
-            '/records',
+            'PUT',
+            '/records/' . $id,
             'record-form',
             'Update Transaction Record',
             [

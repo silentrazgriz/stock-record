@@ -513,7 +513,7 @@
                 }
             ],
             "description": "Form builder package for laravel",
-            "time": "2018-10-01 03:12:15"
+            "time": "2018-10-01T03:12:15+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
