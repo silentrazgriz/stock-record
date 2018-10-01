@@ -5,21 +5,27 @@ declare(strict_types=1);
 namespace App\Http\Controllers;
 
 
+use App\Data\User\UserRepository;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController
 {
+    private $userRepository;
+
+    public function __construct(
+        UserRepository $userRepository
+    ) {
+        $this->userRepository = $userRepository;
+    }
+
     public function index()
     {
         if(Auth::guest()) {
             return redirect('login');
         }
 
-        return view('dashboard');
-    }
+        dd($this->userRepository->findById(Auth::user()->id, ['userAccounts.records.quote'])->toArray());
 
-    public function summary()
-    {
         return view('dashboard');
     }
 }

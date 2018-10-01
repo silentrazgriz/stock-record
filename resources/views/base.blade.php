@@ -16,7 +16,7 @@
         </div>
         <main class="main">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item">Home</li>
+                <li class="breadcrumb-item">Stock Record</li>
                 <li class="breadcrumb-menu">
                     @if(!Auth::guest())
                     <span>

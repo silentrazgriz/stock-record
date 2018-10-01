@@ -82,6 +82,9 @@ class UpdateRecordForm extends Form
             ->setChoiceValues(ChoiceValueParser::parse($userAccounts, 'name', 'id'))
             ->setDefaultValue($values['user_account_id']);
 
+        $this->addField('transaction_date', 'Transaction Date', FieldType::DATE)
+            ->setDefaultValue($values['transaction_date']);
+
         $this->addField('type', 'Transaction Type', FieldType::SELECT)
             ->setChoiceValues([
                 ['text' => 'BUY', 'value' => RecordType::BUY],

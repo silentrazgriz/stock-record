@@ -21,6 +21,7 @@ class RecordList extends CollectionRenderer
                 ['key' => 'total_shares', 'label' => 'Shares', 'type' => 'number'],
                 ['key' => 'sub_total', 'label' => 'Sub Total', 'type' => 'number'],
                 ['key' => 'broker_fee', 'label' => 'Fee', 'type' => 'number'],
+                ['key' => 'transaction_date', 'label' => 'Date', 'type' => 'date']
             ],
             [
                 'actions' => [

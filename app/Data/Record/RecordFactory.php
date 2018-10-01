@@ -47,6 +47,7 @@ final class RecordFactory
             $totalPrice * ($userAccount->brokerAccount->buy_commission / 100):
             $totalPrice * ($userAccount->brokerAccount->sell_commission / 100);
         $record->type = $payload['type'];
+        $record->transaction_date = $payload['transaction_date'];
 
         return $record;
     }
@@ -69,6 +70,7 @@ final class RecordFactory
             $totalPrice * ($userAccount->brokerAccount->buy_commission / 100):
             $totalPrice * ($userAccount->brokerAccount->sell_commission / 100);
         $record->type = $payload['type'] ?? $record->type;
+        $record->transaction_date = $payload['transaction_date'] ?? $record->transaction_date;
 
         return $record;
     }

@@ -52,6 +52,10 @@
                                         <td class="text-right">
                                             {{ number_format(data_get($collection, $field['key']), 2) }}
                                         </td>
+                                    @elseif($field['type'] == 'date')
+                                        <td>
+                                            {{ date('d-m-Y', strtotime(data_get($collection, $field['key']))) }}
+                                        </td>
                                     @else
                                         <td>
                                             {{ data_get($collection, $field['key']) }}
