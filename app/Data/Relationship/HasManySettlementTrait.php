@@ -7,15 +7,15 @@ namespace App\Data\Relationship;
 
 
 use App\Component\Relationship\RelationshipTrait;
-use App\Data\Realization\Realization;
+use App\Data\Settlement\Settlement;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-trait HasManyRealizationTrait
+trait HasManySettlementTrait
 {
     use RelationshipTrait;
 
-    public function realizations(): HasMany
+    public function settlements(): HasMany
     {
-        return $this->hasMany(Realization::class);
+        return $this->hasMany(Settlement::class);
     }
 }

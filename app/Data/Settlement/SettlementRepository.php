@@ -3,21 +3,21 @@
 declare(strict_types=1);
 
 
-namespace App\Data\Realization;
+namespace App\Data\Settlement;
 
 
 use App\Component\Repository\Repository;
 use Illuminate\Support\Collection;
 use Exception;
 
-class RealizationRepository extends Repository
+class SettlementRepository extends Repository
 {
     /**
      * RealizationRepository constructor.
-     * @param RealizationFactory $factory
+     * @param SettlementFactory $factory
      */
     public function __construct(
-        RealizationFactory $factory
+        SettlementFactory $factory
     )
     {
         $this->factory = $factory;
@@ -29,7 +29,7 @@ class RealizationRepository extends Repository
      */
     public function all(array $with = []): Collection
     {
-        return Realization::with($with)
+        return Settlement::with($with)
             ->orderBy('created_at')
             ->get();
     }
@@ -37,13 +37,13 @@ class RealizationRepository extends Repository
     /**
      * @param $id
      * @param array $with
-     * @return Realization|null
+     * @return Settlement|null
      */
-    public function findById($id, array $with = []): ?Realization
+    public function findById($id, array $with = []): ?Settlement
     {
         try {
             if (count($with) == 0) {
-                return Realization::find($id);
+                return Settlement::find($id);
             }
 
             return $this->find(['id' => $id], $with)
@@ -60,7 +60,7 @@ class RealizationRepository extends Repository
      */
     public function find(array $condition, array $with = []): Collection
     {
-        return Realization::where($condition)
+        return Settlement::where($condition)
             ->with($with)
             ->orderBy('created_at')
             ->get();
@@ -68,9 +68,9 @@ class RealizationRepository extends Repository
 
     /**
      * @param array $payload
-     * @return Realization
+     * @return Settlement
      */
-    public function create(array $payload): Realization
+    public function create(array $payload): Settlement
     {
         $realization = $this->factory->create($payload);
         $realization->save();
@@ -81,9 +81,9 @@ class RealizationRepository extends Repository
     /**
      * @param $id
      * @param array $payload
-     * @return Realization
+     * @return Settlement
      */
-    public function update($id, array $payload): Realization
+    public function update($id, array $payload): Settlement
     {
         $realization = $this->factory->update(
             $this->findById($id),
@@ -100,6 +100,6 @@ class RealizationRepository extends Repository
      */
     public function destroy($id): int
     {
-        return Realization::destroy($id);
+        return Settlement::destroy($id);
     }
 }

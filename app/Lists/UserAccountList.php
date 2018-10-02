@@ -5,10 +5,9 @@ declare(strict_types=1);
 
 namespace App\Lists;
 
+use Gaia\Chiron\Component\CollectionList;
 
-use App\Component\CollectionRenderer;
-
-class UserAccountList extends CollectionRenderer
+class UserAccountList extends CollectionList
 {
     public function __construct()
     {

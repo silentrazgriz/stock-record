@@ -6,9 +6,10 @@ declare(strict_types=1);
 namespace App\Lists;
 
 
-use App\Component\CollectionRenderer;
 
-class QuoteList extends CollectionRenderer
+use Gaia\Chiron\Component\CollectionList;
+
+class QuoteList extends CollectionList
 {
     public function __construct()
     {

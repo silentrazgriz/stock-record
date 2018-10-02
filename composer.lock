@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "cf24896cb9a89debd7ae0b332641fecc",
+    "content-hash": "58d9b029a95b4d414eb8c07666c21c1b",
     "packages": [
         {
             "name": "defuse/php-encryption",
@@ -476,6 +476,46 @@
             "time": "2017-06-27T22:17:23+00:00"
         },
         {
+            "name": "gaia/chiron",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/silentrazgriz/chiron.git",
+                "reference": "9ce8f86132bfc091eac3d0625158deef84829a50"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/silentrazgriz/chiron/zipball/9ce8f86132bfc091eac3d0625158deef84829a50",
+                "reference": "9ce8f86132bfc091eac3d0625158deef84829a50",
+                "shasum": ""
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Gaia\\Chiron\\ChironServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Gaia\\Chiron\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "authors": [
+                {
+                    "name": "Valentino Ekaputra",
+                    "email": "silentrazgriz@gmail.com"
+                }
+            ],
+            "description": "List builder package for laravel",
+            "time": "2018-10-02 18:16:43"
+        },
+        {
             "name": "gaia/tekton",
             "version": "dev-master",
             "source": {
@@ -513,7 +553,7 @@
                 }
             ],
             "description": "Form builder package for laravel",
-            "time": "2018-10-01T03:12:15+00:00"
+            "time": "2018-10-01 03:12:15"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -5474,6 +5514,7 @@
     "aliases": [],
     "minimum-stability": "dev",
     "stability-flags": {
+        "gaia/chiron": 20,
         "gaia/tekton": 20
     },
     "prefer-stable": true,

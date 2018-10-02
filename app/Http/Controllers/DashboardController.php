@@ -24,7 +24,7 @@ class DashboardController
             return redirect('login');
         }
 
-        dd($this->userRepository->findById(Auth::user()->id, ['userAccounts.records.quote'])->toArray());
+        //dd($this->userRepository->findById(Auth::user()->id, ['userAccounts.records.quote'])->toArray());
 
         return view('dashboard');
     }

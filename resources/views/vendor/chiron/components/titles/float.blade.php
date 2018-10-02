@@ -1,0 +1,1 @@
+<th class="text-right" scope="col">{{ $colTitle }}</th>

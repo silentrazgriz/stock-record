@@ -6,9 +6,10 @@ declare(strict_types=1);
 namespace App\Lists;
 
 
-use App\Component\CollectionRenderer;
 
-class BrokerAccountList extends CollectionRenderer
+use Gaia\Chiron\Component\CollectionList;
+
+class BrokerAccountList extends CollectionList
 {
     public function __construct()
     {

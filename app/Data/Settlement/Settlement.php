@@ -3,13 +3,13 @@
 declare(strict_types=1);
 
 
-namespace App\Data\Realization;
+namespace App\Data\Settlement;
 
 
 use App\Data\Relationship\BelongsToUserAccountTrait;
 use Illuminate\Database\Eloquent\Model;
 
-class Realization extends Model
+class Settlement extends Model
 {
     use BelongsToUserAccountTrait;
 
