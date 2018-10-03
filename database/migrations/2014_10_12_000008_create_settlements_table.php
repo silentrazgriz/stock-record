@@ -18,7 +18,9 @@ class CreateSettlementsTable extends Migration
             $table->unsignedInteger('user_account_id');
             $table->timestamp('transaction_at');
             $table->timestamp('settled_at');
-            $table->bigInteger('amount');
+            $table->bigInteger('buy_amount');
+            $table->bigInteger('sell_amount');
+            $table->bigInteger('net_amount');
             $table->enum('settlement_type', ['DEPOSIT', 'ORDER']);
             $table->timestamps();
 

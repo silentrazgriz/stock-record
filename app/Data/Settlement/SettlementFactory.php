@@ -16,7 +16,9 @@ final class SettlementFactory
         $realization = new Settlement();
 
         $realization->user_account_id = $payload['user_account_id'];
-        $realization->amount = $payload['amount'];
+        $realization->buy_amount = $payload['buy_amount'];
+        $realization->sell_amount = $payload['sell_amount'];
+        $realization->net_amount = $payload['net_amount'];
         $realization->transaction_at = $payload['transaction_at'];
         $realization->settled_at = $payload['settled_at'];
         $realization->settlement_type = $payload['settlement_type'];
@@ -32,7 +34,9 @@ final class SettlementFactory
     public function update(Settlement $realization, array $payload): Settlement
     {
         $realization->user_account_id = $payload['user_account_id'] ?? $realization->user_account_id;
-        $realization->amount = $payload['amount'] ?? $realization->amount;
+        $realization->buy_amount = $payload['buy_amount'] ?? $realization->buy_amount;
+        $realization->sell_amount = $payload['sell_amount'] ?? $realization->sell_amount;
+        $realization->net_amount = $payload['net_amount'] ?? $realization->net_amount;
         $realization->transaction_at = $payload['transaction_at'] ?? $realization->transaction_at;
         $realization->settled_at = $payload['settled_at'] ?? $realization->realization_at;
         $realization->settlement_type = $payload['settlement_type'] ?? $realization->settlement_type;

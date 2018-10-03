@@ -2,12 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Component\Value\RecordType;
+use App\Component\Value\SettlementType;
 use App\Data\Quote\QuoteRepository;
 use App\Data\Record\RecordRepository;
+use App\Data\Settlement\SettlementRepository;
+use App\Data\Summary\SummaryRepository;
 use App\Data\UserAccount\UserAccountRepository;
 use App\Forms\Record\CreateRecordForm;
 use App\Forms\Record\UpdateRecordForm;
 use App\Lists\RecordList;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
@@ -32,19 +37,24 @@ class RecordController extends Controller
     private $quoteRepository;
 
     /**
-     * RecordController constructor.
-     * @param RecordRepository $recordRepository
-     * @param UserAccountRepository $userAccountRepository
-     * @param QuoteRepository $quoteRepository
+     * @var SummaryRepository
      */
+    private $summaryRepository;
+
+    private $settlementRepository;
+
     public function __construct(
         RecordRepository $recordRepository,
         UserAccountRepository $userAccountRepository,
-        QuoteRepository $quoteRepository
+        QuoteRepository $quoteRepository,
+        SummaryRepository $summaryRepository,
+        SettlementRepository $settlementRepository
     ) {
         $this->recordRepository = $recordRepository;
         $this->userAccountRepository = $userAccountRepository;
         $this->quoteRepository = $quoteRepository;
+        $this->summaryRepository = $summaryRepository;
+        $this->settlementRepository = $settlementRepository;
     }
 
     /**
@@ -73,7 +83,50 @@ class RecordController extends Controller
      */
     public function store(Request $request)
     {
-        $this->recordRepository->create($request->all());
+        $record = $this->recordRepository->create($request->all());
+
+        // Update Summary
+        $summaries = $this->summaryRepository->find(['quote_id' => $record->quote_id]);
+
+        if ($summaries->count() == 0) {
+            $this->summaryRepository->create([
+                'user_account_id'   => $record->user_account_id,
+                'quote_id'          => $record->quote_id,
+                'average_price'     => $record->price,
+                'total_shares'      => $record->total_shares
+            ]);
+        } else {
+            $summary = $summaries[0];
+            $this->summaryRepository->update($summary->id, $this->getSummaryDetails($summary, $record));
+        }
+
+        // Update Settlement
+        $today = Carbon::now();
+        $todayDate = $today->toDateString();
+        $settlements = $this->settlementRepository->find(['transaction_at' => $todayDate]);
+
+        $buy_amount = $record->type == RecordType::BUY ? ($record->price * $record->total_shares) + $record->broker_fee : 0;
+        $sell_amount = $record->type == RecordType::SELL ? ($record->price * $record->total_shares) - $record->broker_fee : 0;
+
+        if ($settlements->count() == 0) {
+            $this->settlementRepository->create([
+                'user_account_id'   => $record->user_account_id,
+                'buy_amount'        => $buy_amount,
+                'sell_amount'       => $sell_amount,
+                'net_amount'        => $sell_amount - $buy_amount,
+                'transaction_at'    => $todayDate,
+                'settled_at'        => $today->addDays(3)->toDateString(),
+                'settlement_type'   => SettlementType::ORDER
+            ]);
+        } else {
+            $settlement = $settlements[0];
+            $this->settlementRepository->update($settlement->id, [
+                'buy_amount'    => $settlement->buy_amount + $buy_amount,
+                'sell_amount'   => $settlement->sell_amount + $sell_amount,
+                'net_amount'    => $settlement->net_amount + $sell_amount - $buy_amount
+            ]);
+        }
+
         return redirect()->route('records.index');
     }
 
@@ -108,6 +161,25 @@ class RecordController extends Controller
     {
         $this->recordRepository->destroy($id);
         return redirect()->route('records.index');
+    }
+
+    /**
+     * @param $summary
+     * @param $record
+     * @return array
+     */
+    private function getSummaryDetails($summary, $record)
+    {
+        $result = [
+            'summary' => $summary->average_price * $summary->total_shares,
+            'record' => $record->price * $record->total_shares,
+            'total_shares' => $summary->total_shares + $record->total_shares
+        ];
+
+        return [
+            'average_price' => ($result['summary'] + $result['record']) / $result['total_shares'],
+            'total_shares' => $result['total_shares']
+        ];
     }
 
     /**
