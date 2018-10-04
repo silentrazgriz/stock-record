@@ -55,6 +55,12 @@ return [
             'route' => 'broker-accounts.index'
         ],
         [
+            'type' => 'link',
+            'text' => 'Holiday',
+            'icon' => 'fas fa-calendar-alt',
+            'route' => 'off-days.index'
+        ],
+        [
             'type' => 'logout',
             'text' => 'Logout',
             'icon' => 'fas fa-sign-out-alt',

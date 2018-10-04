@@ -10,6 +10,10 @@ use App\Component\Repository\Repository;
 use Illuminate\Support\Collection;
 use Exception;
 
+/**
+ * Class SummaryRepository
+ * @package App\Data\Summary
+ */
 class SummaryRepository extends Repository
 {
     /**
@@ -64,6 +68,19 @@ class SummaryRepository extends Repository
             ->with($with)
             ->orderBy('created_at')
             ->get();
+    }
+
+    /**
+     * @param $quoteId
+     * @param $userAccountId
+     * @return Collection
+     */
+    public function findQuoteByUserAccount($quoteId, $userAccountId): Collection
+    {
+        return $this->find([
+            'quote_id' => $quoteId,
+            'user_account_id' => $userAccountId
+        ]);
     }
 
     /**

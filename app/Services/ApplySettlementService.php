@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Data\Margin\MarginRepository;
 use App\Data\Settlement\SettlementRepository;
 
 /**
@@ -18,13 +19,21 @@ final class ApplySettlementService
     private $settlementRepository;
 
     /**
+     * @var MarginRepository
+     */
+    private $marginRepository;
+
+    /**
      * ApplySettlementService constructor.
      * @param SettlementRepository $settlementRepository
+     * @param MarginRepository $marginRepository
      */
     public function __construct(
-        SettlementRepository $settlementRepository
+        SettlementRepository $settlementRepository,
+        MarginRepository $marginRepository
     ) {
         $this->settlementRepository = $settlementRepository;
+        $this->marginRepository = $marginRepository;
     }
 
     /**
@@ -32,6 +41,5 @@ final class ApplySettlementService
      */
     public function apply()
     {
-
     }
 }

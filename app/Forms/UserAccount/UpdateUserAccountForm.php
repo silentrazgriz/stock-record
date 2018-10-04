@@ -36,7 +36,7 @@ class UpdateUserAccountForm extends Form
             'PUT',
             '/user-accounts/' . $id,
             'user-account-form',
-            'Add Account',
+            'Change Account Details',
             [
                 'button' => [
                     'placement' => [
@@ -45,7 +45,7 @@ class UpdateUserAccountForm extends Form
                     ],
                     'action' => [
                         'submit' => [
-                            'text' => 'Add'
+                            'text' => 'Save'
                         ]
                     ]
                 ],

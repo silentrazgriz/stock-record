@@ -36,7 +36,7 @@ final class CalculateSettlementService
      */
     public function store(Record $record)
     {
-        $settlements = $this->settlementRepository->findToday();
+        $settlements = $this->settlementRepository->findTodayByUserAccount($record->user_account_id);
 
         $detail = $this->getAmountDetails($record);
 
@@ -65,7 +65,7 @@ final class CalculateSettlementService
      */
     public function destroy(Record $record)
     {
-        $settlements = $this->settlementRepository->findToday();
+        $settlements = $this->settlementRepository->findTodayByUserAccount($record->user_account_id);
 
         $detail = $this->getAmountDetails($record);
 
@@ -90,7 +90,7 @@ final class CalculateSettlementService
         $i = 0;
         while ($i < 3) {
             $settlementDate->addDay();
-            if (!$settlementDate->isWeekend()) {
+            if ($settlementDate->isWeekday()) {
                 $i++;
             }
         }

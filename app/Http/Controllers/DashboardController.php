@@ -7,6 +7,7 @@ namespace App\Http\Controllers;
 
 use App\Data\Summary\SummaryRepository;
 use App\Data\User\UserRepository;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class DashboardController
@@ -23,7 +24,7 @@ class DashboardController
         $this->summaryRepository = $summaryRepository;
     }
 
-    public function index()
+    public function index(Request $request)
     {
         if(Auth::guest()) {
             return redirect('login');

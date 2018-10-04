@@ -29,7 +29,7 @@ class OffDayRepository extends Repository
     public function all(array $with = []): Collection
     {
         return OffDay::with($with)
-            ->orderBy('created_at')
+            ->orderBy('off_date', 'desc')
             ->get();
     }
 
@@ -61,7 +61,7 @@ class OffDayRepository extends Repository
     {
         return OffDay::where($condition)
             ->with($with)
-            ->orderBy('created_at')
+            ->orderBy('off_date', 'desc')
             ->get();
     }
 

@@ -34,7 +34,7 @@ final class CalculateSummaryService
      */
     public function store(Record $record)
     {
-        $summaries = $this->summaryRepository->find(['quote_id' => $record->quote_id]);
+        $summaries = $this->summaryRepository->findQuoteByUserAccount($record->quote_id, $record->user_account_id);
 
         if ($summaries->count() == 0) {
             $this->summaryRepository->create([

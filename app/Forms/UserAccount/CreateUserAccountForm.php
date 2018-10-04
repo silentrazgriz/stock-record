@@ -34,7 +34,7 @@ class CreateUserAccountForm extends Form
             'POST',
             '/user-accounts',
             'user-account-form',
-            'Add Account',
+            'Add Account Details',
             [
                 'button' => [
                     'placement' => [
@@ -43,7 +43,7 @@ class CreateUserAccountForm extends Form
                     ],
                     'action' => [
                         'submit' => [
-                            'text' => 'Add'
+                            'text' => 'Save'
                         ]
                     ]
                 ],

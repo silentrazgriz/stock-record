@@ -27,7 +27,7 @@ class CreateBrokerAccountForm extends Form
                     ],
                     'action' => [
                         'submit' => [
-                            'text' => 'Add'
+                            'text' => 'Save'
                         ]
                     ]
                 ],

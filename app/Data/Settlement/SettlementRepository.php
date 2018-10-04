@@ -11,6 +11,10 @@ use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Exception;
 
+/**
+ * Class SettlementRepository
+ * @package App\Data\Settlement
+ */
 class SettlementRepository extends Repository
 {
     /**
@@ -67,9 +71,27 @@ class SettlementRepository extends Repository
             ->get();
     }
 
-    public function findToday(): Collection
+    /**
+     * @return Collection
+     */
+    public function findTodays(): Collection
     {
-        return $this->find(['transaction_at' => Carbon::now()->toDateString()]);
+        return $this->find([
+            'transaction_at' => Carbon::now()->toDateString()
+        ]);
+    }
+
+
+    /**
+     * @param $userAccountId
+     * @return Collection
+     */
+    public function findTodayByUserAccount($userAccountId): Collection
+    {
+        return $this->find([
+            'user_account_id' => $userAccountId,
+            'transaction_at' => Carbon::now()->toDateString()
+        ]);
     }
 
     /**

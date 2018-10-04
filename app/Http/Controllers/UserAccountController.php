@@ -34,7 +34,6 @@ class UserAccountController extends Controller
     public function create()
     {
         $createForm = new CreateUserAccountForm($this->brokerAccountRepository);
-
         return $createForm->render();
     }
 
@@ -51,7 +50,7 @@ class UserAccountController extends Controller
 
     public function edit($id)
     {
-        $updateForm = new UpdateUserAccountForm($this->brokerAccountRepository);
+        $updateForm = new UpdateUserAccountForm($this->brokerAccountRepository, $id);
         $updateForm->setDefaultValues($this->userAccountRepository->findById($id)->toArray());
 
         return $updateForm->render();

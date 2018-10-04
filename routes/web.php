@@ -21,3 +21,5 @@ Route::resource('quotes', 'QuoteController')
     ->only(['index']);
 Route::resource('records', 'RecordController')
     ->except(['edit', 'update']);
+Route::resource('off-days', 'OffDayController')
+    ->except(['show']);

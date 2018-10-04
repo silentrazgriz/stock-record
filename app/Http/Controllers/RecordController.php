@@ -2,19 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Component\Value\RecordType;
-use App\Component\Value\SettlementType;
 use App\Data\Quote\QuoteRepository;
 use App\Data\Record\RecordRepository;
-use App\Data\Settlement\SettlementRepository;
-use App\Data\Summary\SummaryRepository;
 use App\Data\UserAccount\UserAccountRepository;
 use App\Forms\Record\CreateRecordForm;
-use App\Forms\Record\UpdateRecordForm;
 use App\Lists\RecordList;
 use App\Services\CalculateSettlementService;
 use App\Services\CalculateSummaryService;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 /**
@@ -53,7 +47,6 @@ class RecordController extends Controller
      * @param RecordRepository $recordRepository
      * @param UserAccountRepository $userAccountRepository
      * @param QuoteRepository $quoteRepository
-     * @param SummaryRepository $summaryRepository
      * @param CalculateSummaryService $calculateSummaryService
      * @param CalculateSettlementService $calculateSettlementService
      */
@@ -61,14 +54,12 @@ class RecordController extends Controller
         RecordRepository $recordRepository,
         UserAccountRepository $userAccountRepository,
         QuoteRepository $quoteRepository,
-        SummaryRepository $summaryRepository,
         CalculateSummaryService $calculateSummaryService,
         CalculateSettlementService $calculateSettlementService
     ) {
         $this->recordRepository = $recordRepository;
         $this->userAccountRepository = $userAccountRepository;
         $this->quoteRepository = $quoteRepository;
-        $this->summaryRepository = $summaryRepository;
         $this->calculateSummaryService = $calculateSummaryService;
         $this->calculateSettlementService = $calculateSettlementService;
     }

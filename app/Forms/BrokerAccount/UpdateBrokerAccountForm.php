@@ -26,7 +26,7 @@ class UpdateBrokerAccountForm extends Form
             'PUT',
             '/broker-accounts/' . $id,
             'broker-account-form',
-            'Edit Broker Account',
+            'Change Broker Account',
             [
                 'button' => [
                     'placement' => [
@@ -35,7 +35,7 @@ class UpdateBrokerAccountForm extends Form
                     ],
                     'action' => [
                         'submit' => [
-                            'text' => 'Edit'
+                            'text' => 'Save'
                         ]
                     ]
                 ],
