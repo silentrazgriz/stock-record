@@ -7,6 +7,7 @@ namespace App\Data\Settlement;
 
 
 use App\Component\Repository\Repository;
+use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Exception;
 
@@ -64,6 +65,11 @@ class SettlementRepository extends Repository
             ->with($with)
             ->orderBy('created_at')
             ->get();
+    }
+
+    public function findToday(): Collection
+    {
+        return $this->find(['transaction_at' => Carbon::now()->toDateString()]);
     }
 
     /**

@@ -151,6 +151,7 @@ return [
          * Package Service Providers...
          */
         Gaia\Tekton\TektonServiceProvider::class,
+        Gaia\Chiron\ChironServiceProvider::class,
 
         /*
          * Application Service Providers...

@@ -12,6 +12,8 @@ use App\Data\UserAccount\UserAccountRepository;
 use App\Forms\Record\CreateRecordForm;
 use App\Forms\Record\UpdateRecordForm;
 use App\Lists\RecordList;
+use App\Services\CalculateSettlementService;
+use App\Services\CalculateSummaryService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 
@@ -37,24 +39,38 @@ class RecordController extends Controller
     private $quoteRepository;
 
     /**
-     * @var SummaryRepository
+     * @var CalculateSummaryService
      */
-    private $summaryRepository;
+    private $calculateSummaryService;
 
-    private $settlementRepository;
+    /**
+     * @var CalculateSettlementService
+     */
+    private $calculateSettlementService;
 
+    /**
+     * RecordController constructor.
+     * @param RecordRepository $recordRepository
+     * @param UserAccountRepository $userAccountRepository
+     * @param QuoteRepository $quoteRepository
+     * @param SummaryRepository $summaryRepository
+     * @param CalculateSummaryService $calculateSummaryService
+     * @param CalculateSettlementService $calculateSettlementService
+     */
     public function __construct(
         RecordRepository $recordRepository,
         UserAccountRepository $userAccountRepository,
         QuoteRepository $quoteRepository,
         SummaryRepository $summaryRepository,
-        SettlementRepository $settlementRepository
+        CalculateSummaryService $calculateSummaryService,
+        CalculateSettlementService $calculateSettlementService
     ) {
         $this->recordRepository = $recordRepository;
         $this->userAccountRepository = $userAccountRepository;
         $this->quoteRepository = $quoteRepository;
         $this->summaryRepository = $summaryRepository;
-        $this->settlementRepository = $settlementRepository;
+        $this->calculateSummaryService = $calculateSummaryService;
+        $this->calculateSettlementService = $calculateSettlementService;
     }
 
     /**
@@ -85,71 +101,9 @@ class RecordController extends Controller
     {
         $record = $this->recordRepository->create($request->all());
 
-        // Update Summary
-        $summaries = $this->summaryRepository->find(['quote_id' => $record->quote_id]);
+        $this->calculateSummaryService->store($record);
+        $this->calculateSettlementService->store($record);
 
-        if ($summaries->count() == 0) {
-            $this->summaryRepository->create([
-                'user_account_id'   => $record->user_account_id,
-                'quote_id'          => $record->quote_id,
-                'average_price'     => $record->price,
-                'total_shares'      => $record->total_shares
-            ]);
-        } else {
-            $summary = $summaries[0];
-            $this->summaryRepository->update($summary->id, $this->getSummaryDetails($summary, $record));
-        }
-
-        // Update Settlement
-        $today = Carbon::now();
-        $todayDate = $today->toDateString();
-        $settlements = $this->settlementRepository->find(['transaction_at' => $todayDate]);
-
-        $buy_amount = $record->type == RecordType::BUY ? ($record->price * $record->total_shares) + $record->broker_fee : 0;
-        $sell_amount = $record->type == RecordType::SELL ? ($record->price * $record->total_shares) - $record->broker_fee : 0;
-
-        if ($settlements->count() == 0) {
-            $this->settlementRepository->create([
-                'user_account_id'   => $record->user_account_id,
-                'buy_amount'        => $buy_amount,
-                'sell_amount'       => $sell_amount,
-                'net_amount'        => $sell_amount - $buy_amount,
-                'transaction_at'    => $todayDate,
-                'settled_at'        => $today->addDays(3)->toDateString(),
-                'settlement_type'   => SettlementType::ORDER
-            ]);
-        } else {
-            $settlement = $settlements[0];
-            $this->settlementRepository->update($settlement->id, [
-                'buy_amount'    => $settlement->buy_amount + $buy_amount,
-                'sell_amount'   => $settlement->sell_amount + $sell_amount,
-                'net_amount'    => $settlement->net_amount + $sell_amount - $buy_amount
-            ]);
-        }
-
-        return redirect()->route('records.index');
-    }
-
-    /**
-     * @param $id
-     * @return mixed
-     */
-    public function edit($id)
-    {
-        $updateForm = new UpdateRecordForm($this->userAccountRepository, $this->quoteRepository, $id);
-        $updateForm->setDefaultValues($this->recordRepository->findById($id)->toArray());
-
-        return $updateForm->render();
-    }
-
-    /**
-     * @param Request $request
-     * @param $id
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, $id)
-    {
-        $this->recordRepository->update($id, $request->all());
         return redirect()->route('records.index');
     }
 
@@ -159,27 +113,13 @@ class RecordController extends Controller
      */
     public function destroy($id)
     {
+        $record = $this->recordRepository->findById($id);
+
+        $this->calculateSummaryService->destroy($record);
+        $this->calculateSettlementService->destroy($record);
+
         $this->recordRepository->destroy($id);
         return redirect()->route('records.index');
-    }
-
-    /**
-     * @param $summary
-     * @param $record
-     * @return array
-     */
-    private function getSummaryDetails($summary, $record)
-    {
-        $result = [
-            'summary' => $summary->average_price * $summary->total_shares,
-            'record' => $record->price * $record->total_shares,
-            'total_shares' => $summary->total_shares + $record->total_shares
-        ];
-
-        return [
-            'average_price' => ($result['summary'] + $result['record']) / $result['total_shares'],
-            'total_shares' => $result['total_shares']
-        ];
     }
 
     /**
