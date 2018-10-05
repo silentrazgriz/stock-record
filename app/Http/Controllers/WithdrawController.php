@@ -5,16 +5,12 @@ namespace App\Http\Controllers;
 use App\Component\Value\SettlementType;
 use App\Data\Settlement\SettlementRepository;
 use App\Data\UserAccount\UserAccountRepository;
-use App\Forms\Deposit\CreateDepositForm;
-use App\Lists\DepositList;
+use App\Forms\Withdraw\CreateWithdrawForm;
+use App\Lists\WithdrawList;
 use App\Services\SettlementService;
 use Illuminate\Http\Request;
 
-/**
- * Class DepositController
- * @package App\Http\Controllers
- */
-class DepositController extends Controller
+class WithdrawController extends Controller
 {
     /**
      * @var SettlementRepository
@@ -32,7 +28,7 @@ class DepositController extends Controller
     private $settlementService;
 
     /**
-     * DepositController constructor.
+     * WithdrawController constructor.
      * @param SettlementRepository $settlementRepository
      * @param UserAccountRepository $userAccountRepository
      * @param SettlementService $settlementService
@@ -52,8 +48,8 @@ class DepositController extends Controller
      */
     public function index()
     {
-        $list = new DepositList();
-        $list->setCollection($this->settlementRepository->find(['settlement_type' => SettlementType::DEPOSIT]));
+        $list = new WithdrawList();
+        $list->setCollection($this->settlementRepository->find(['settlement_type' => SettlementType::WITHDRAW]));
         return $list->render();
     }
 
@@ -62,7 +58,7 @@ class DepositController extends Controller
      */
     public function create()
     {
-        $createForm = new CreateDepositForm($this->userAccountRepository);
+        $createForm = new CreateWithdrawForm($this->userAccountRepository);
         return $createForm->render();
     }
 
@@ -72,8 +68,8 @@ class DepositController extends Controller
      */
     public function store(Request $request)
     {
-        $this->settlementService->deposit($request->all(), SettlementType::DEPOSIT);
-        return redirect()->route('deposits.index');
+        $this->settlementService->deposit($request->all(), SettlementType::WITHDRAW);
+        return redirect()->route('withdraws.index');
     }
 
     /**
@@ -83,6 +79,6 @@ class DepositController extends Controller
     public function destroy($id)
     {
         $this->settlementService->cancelDeposit($id);
-        return redirect()->route('deposits.index');
+        return redirect()->route('withdraws.index');
     }
 }

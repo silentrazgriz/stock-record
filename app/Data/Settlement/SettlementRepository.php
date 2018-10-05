@@ -72,25 +72,15 @@ class SettlementRepository extends Repository
     }
 
     /**
+     * @param string $date
+     * @param string $userAccountId
      * @return Collection
      */
-    public function findTodays(): Collection
-    {
-        return $this->find([
-            'transaction_at' => Carbon::now()->toDateString()
-        ]);
-    }
-
-
-    /**
-     * @param $userAccountId
-     * @return Collection
-     */
-    public function findTodayByUserAccount($userAccountId): Collection
+    public function findByTransactionDateAndUserAccount(string $date, string $userAccountId): Collection
     {
         return $this->find([
             'user_account_id' => $userAccountId,
-            'transaction_at' => Carbon::now()->toDateString()
+            'transaction_at' => $date,
         ]);
     }
 

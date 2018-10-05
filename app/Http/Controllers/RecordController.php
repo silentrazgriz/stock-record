@@ -7,8 +7,8 @@ use App\Data\Record\RecordRepository;
 use App\Data\UserAccount\UserAccountRepository;
 use App\Forms\Record\CreateRecordForm;
 use App\Lists\RecordList;
-use App\Services\CalculateSettlementService;
-use App\Services\CalculateSummaryService;
+use App\Services\SettlementService;
+use App\Services\SummaryService;
 use Illuminate\Http\Request;
 
 /**
@@ -33,12 +33,12 @@ class RecordController extends Controller
     private $quoteRepository;
 
     /**
-     * @var CalculateSummaryService
+     * @var SummaryService
      */
     private $calculateSummaryService;
 
     /**
-     * @var CalculateSettlementService
+     * @var SettlementService
      */
     private $calculateSettlementService;
 
@@ -47,15 +47,15 @@ class RecordController extends Controller
      * @param RecordRepository $recordRepository
      * @param UserAccountRepository $userAccountRepository
      * @param QuoteRepository $quoteRepository
-     * @param CalculateSummaryService $calculateSummaryService
-     * @param CalculateSettlementService $calculateSettlementService
+     * @param SummaryService $calculateSummaryService
+     * @param SettlementService $calculateSettlementService
      */
     public function __construct(
         RecordRepository $recordRepository,
         UserAccountRepository $userAccountRepository,
         QuoteRepository $quoteRepository,
-        CalculateSummaryService $calculateSummaryService,
-        CalculateSettlementService $calculateSettlementService
+        SummaryService $calculateSummaryService,
+        SettlementService $calculateSettlementService
     ) {
         $this->recordRepository = $recordRepository;
         $this->userAccountRepository = $userAccountRepository;
@@ -93,7 +93,7 @@ class RecordController extends Controller
         $record = $this->recordRepository->create($request->all());
 
         $this->calculateSummaryService->store($record);
-        $this->calculateSettlementService->store($record);
+        $this->calculateSettlementService->storeOrder($record);
 
         return redirect()->route('records.index');
     }
@@ -107,7 +107,7 @@ class RecordController extends Controller
         $record = $this->recordRepository->findById($id);
 
         $this->calculateSummaryService->destroy($record);
-        $this->calculateSettlementService->destroy($record);
+        $this->calculateSettlementService->cancelOrder($record);
 
         $this->recordRepository->destroy($id);
         return redirect()->route('records.index');

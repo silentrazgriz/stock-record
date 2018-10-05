@@ -71,7 +71,9 @@ class CreateRecordForm extends Form
      */
     protected function build(array $values = []): void
     {
-        $userAccounts = $this->userAccountRepository->find(['user_id' => Auth::user()->id])
+        $userAccounts = $this->userAccountRepository->find([
+                ['user_id', Auth::user()->id]
+            ])
             ->toArray();
 
         $quotes = $this->quoteRepository->all()

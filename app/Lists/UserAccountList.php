@@ -16,6 +16,7 @@ class UserAccountList extends CollectionList
             [
                 ['key' => 'broker_account.code', 'label' => 'Broker Code', 'type' => 'text'],
                 ['key' => 'name', 'label' => 'Account ID', 'type' => 'text'],
+                ['key' => 'balance', 'label' => 'Balance', 'type' => 'number'],
                 ['key' => 'broker_account.buy_commission', 'label' => 'Buy Fee', 'type' => 'float'],
                 ['key' => 'broker_account.sell_commission', 'label' => 'Sell Fee', 'type' => 'float'],
                 ['key' => 'broker_account.margin_interest', 'label' => 'Margin Fee', 'type' => 'float'],

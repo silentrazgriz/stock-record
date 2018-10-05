@@ -10,10 +10,6 @@ use App\Component\Repository\Repository;
 use Illuminate\Support\Collection;
 use Exception;
 
-/**
- * Class SummaryRepository
- * @package App\Data\Summary
- */
 class SummaryRepository extends Repository
 {
     /**

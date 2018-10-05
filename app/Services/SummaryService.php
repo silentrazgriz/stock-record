@@ -12,7 +12,7 @@ use App\Data\Summary\SummaryRepository;
  * Class CalculateSummaryService
  * @package App\Services
  */
-final class CalculateSummaryService
+final class SummaryService
 {
     /**
      * @var SummaryRepository
@@ -54,7 +54,9 @@ final class CalculateSummaryService
      */
     public function destroy(Record $record)
     {
-        $summaries = $this->summaryRepository->find(['quote_id' => $record->quote_id]);
+        $summaries = $this->summaryRepository->find([
+            ['quote_id', '=', $record->quote_id]
+        ]);
 
         if ($summaries->count() == 0) {
             return;

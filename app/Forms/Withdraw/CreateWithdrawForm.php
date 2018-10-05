@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 
-namespace App\Forms\Deposit;
+namespace App\Forms\Withdraw;
 
 use App\Data\UserAccount\UserAccountRepository;
 use Carbon\Carbon;
@@ -13,7 +13,7 @@ use Gaia\Tekton\Component\Value\ButtonPlacement;
 use Gaia\Tekton\Component\Value\FieldType;
 use Illuminate\Support\Facades\Auth;
 
-final class CreateDepositForm extends Form
+final class CreateWithdrawForm extends Form
 {
     private $userAccountRepository;
 
@@ -22,9 +22,9 @@ final class CreateDepositForm extends Form
     ) {
         parent::__construct(
             'POST',
-            '/deposits',
-            'deposit-form',
-            'Add Deposit',
+            '/withdraws',
+            'withdraw-form',
+            'Add Withdraw',
             [
                 'button' => [
                     'placement' => [
@@ -59,7 +59,7 @@ final class CreateDepositForm extends Form
             ->setPlaceholder('Transaction Date')
             ->setDefaultValue(Carbon::now()->toDateString());
 
-        $this->addField('amount', 'Deposit Amount', FieldType::MONEY)
-            ->setPlaceholder('Deposit Amount');
+        $this->addField('amount', 'Withdraw Amount', FieldType::MONEY)
+            ->setPlaceholder('Withdraw Amount');
     }
 }

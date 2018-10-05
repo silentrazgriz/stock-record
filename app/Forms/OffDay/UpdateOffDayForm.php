@@ -14,9 +14,9 @@ final class UpdateOffDayForm extends Form
     public function __construct($id) {
         parent::__construct(
             'PUT',
-            '/user-accounts/' . $id,
-            'user-account-form',
-            'Change Account',
+            '/off-days/' . $id,
+            'off-day-form',
+            'Change Holiday',
             [
                 'button' => [
                     'placement' => [

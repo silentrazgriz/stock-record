@@ -21,7 +21,7 @@ class CreateSettlementsTable extends Migration
             $table->bigInteger('buy_amount');
             $table->bigInteger('sell_amount');
             $table->bigInteger('net_amount');
-            $table->enum('settlement_type', ['DEPOSIT', 'ORDER']);
+            $table->enum('settlement_type', ['DEPOSIT', 'WITHDRAW', 'ORDER']);
             $table->boolean('is_realized')->default(false);
             $table->timestamps();
 

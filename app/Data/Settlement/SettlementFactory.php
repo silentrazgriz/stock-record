@@ -22,7 +22,7 @@ final class SettlementFactory
         $realization->transaction_at = $payload['transaction_at'];
         $realization->settled_at = $payload['settled_at'];
         $realization->settlement_type = $payload['settlement_type'];
-        $realization->is_realized = $payload['is_realized'];
+        $realization->is_realized = $payload['is_realized'] ?? false;
 
         return $realization;
     }

@@ -45,8 +45,14 @@ return [
         [
             'type' => 'link',
             'text' => 'Deposit',
-            'icon' => 'fas fa-credit-card',
+            'icon' => 'fas fa-plus',
             'route' => 'deposits.index'
+        ],
+        [
+            'type' => 'link',
+            'text' => 'Withdraw',
+            'icon' => 'fas fa-minus',
+            'route' => 'withdraws.index'
         ],
         [
             'type' => 'link',

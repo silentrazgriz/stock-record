@@ -7,15 +7,15 @@ namespace App\Lists;
 
 use Gaia\Chiron\Component\CollectionList;
 
-final class DepositList extends CollectionList
+final class WithdrawList extends CollectionList
 {
     public function __construct()
     {
         parent::__construct(
-            'All Deposit',
+            'All Withdraw',
             [
                 ['key' => 'transaction_at', 'label' => 'Transaction Date', 'type' => 'date'],
-                ['key' => 'net_amount', 'label' => 'Deposit Amount', 'type' => 'number'],
+                ['key' => 'net_amount', 'label' => 'Withdraw Amount', 'type' => 'number'],
             ],
             [
                 'actions' => [
@@ -24,7 +24,7 @@ final class DepositList extends CollectionList
                     'update' => false,
                     'destroy' => true
                 ],
-                'route' => 'deposits'
+                'route' => 'withdraws'
             ]
         );
     }

@@ -25,3 +25,5 @@ Route::resource('off-days', 'OffDayController')
     ->except(['show']);
 Route::resource('deposits', 'DepositController')
     ->except(['show', 'edit', 'update']);
+Route::resource('withdraws', 'DepositController')
+    ->except(['show', 'edit', 'update']);
