@@ -35,7 +35,7 @@ class SettlementRepository extends Repository
     public function all(array $with = []): Collection
     {
         return Settlement::with($with)
-            ->orderBy('created_at')
+            ->orderBy('created_at', 'desc')
             ->get();
     }
 
@@ -67,7 +67,7 @@ class SettlementRepository extends Repository
     {
         return Settlement::where($condition)
             ->with($with)
-            ->orderBy('created_at')
+            ->orderBy('created_at', 'desc')
             ->get();
     }
 

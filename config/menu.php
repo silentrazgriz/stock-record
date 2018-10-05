@@ -44,6 +44,12 @@ return [
         ],
         [
             'type' => 'link',
+            'text' => 'Deposit',
+            'icon' => 'fas fa-credit-card',
+            'route' => 'deposits.index'
+        ],
+        [
+            'type' => 'link',
             'text' => 'Quote',
             'icon' => 'fas fa-file-alt',
             'route' => 'quotes.index'
