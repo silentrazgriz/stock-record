@@ -22,12 +22,11 @@
 @endsection
 
 @section('scripts')
-    <script src="{{ asset('vendor/sizzle/sizzle.min.js') }}"></script>
     <script>
-        Sizzle('.delete-item').forEach((item) => {
+        $('.delete-item').each((index, item) => {
             item.addEventListener('click', (e) => {
                 let target = item.dataset.target;
-                Sizzle(target)[0].submit();
+                $(target)[0].submit();
             });
         });
     </script>

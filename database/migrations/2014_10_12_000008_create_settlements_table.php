@@ -27,7 +27,8 @@ class CreateSettlementsTable extends Migration
 
             $table->foreign('user_account_id')
                 ->references('id')
-                ->on('user_accounts');
+                ->on('user_accounts')
+                ->onDelete('cascade');
         });
     }
 
@@ -38,6 +39,6 @@ class CreateSettlementsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('realizations');
+        Schema::dropIfExists('settlements');
     }
 }

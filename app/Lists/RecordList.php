@@ -26,7 +26,7 @@ class RecordList extends CollectionList
                 'actions' => [
                     'detail' => false,
                     'store' => true,
-                    'update' => true,
+                    'update' => false,
                     'destroy' => true
                 ],
                 'route' => 'records'

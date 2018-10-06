@@ -53,7 +53,7 @@ class DepositController extends Controller
     public function index()
     {
         $list = new DepositList();
-        $list->setCollection($this->settlementRepository->find(['settlement_type' => SettlementType::DEPOSIT]));
+        $list->setCollection($this->settlementRepository->find(['settlement_type' => SettlementType::DEPOSIT], ['userAccount']));
         return $list->render();
     }
 

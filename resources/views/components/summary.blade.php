@@ -1,8 +1,13 @@
+@foreach($user['user_accounts'] as $account)
 <div class="card">
     <div class="card-header">
-        This is dashboard
+        {{ $account['name'] }}
     </div>
     <div class="card-body">
-        Hi this is dashboard
+        <table class="table table-hover mb-2">
+            @include('components.rows.title')
+            @include('components.rows.content')
+        </table>
     </div>
 </div>
+@endforeach

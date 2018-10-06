@@ -49,7 +49,7 @@ final class CreateDepositForm extends Form
      */
     protected function build(array $values = []): void
     {
-        $userAccounts = $this->userAccountRepository->find(['user_id', Auth::user()->id])
+        $userAccounts = $this->userAccountRepository->find(['user_id' => Auth::user()->id])
             ->toArray();
 
         $this->addField('user_account_id', 'Account', FieldType::SELECT)

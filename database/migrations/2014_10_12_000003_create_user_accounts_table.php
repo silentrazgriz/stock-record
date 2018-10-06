@@ -25,10 +25,12 @@ class CreateUserAccountsTable extends Migration
 
             $table->foreign('user_id')
                 ->references('id')
-                ->on('users');
+                ->on('users')
+                ->onDelete('cascade');
             $table->foreign('broker_account_id')
                 ->references('id')
-                ->on('broker_accounts');
+                ->on('broker_accounts')
+                ->onDelete('cascade');
         });
     }
 

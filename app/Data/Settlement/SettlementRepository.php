@@ -73,10 +73,10 @@ class SettlementRepository extends Repository
 
     /**
      * @param string $date
-     * @param string $userAccountId
+     * @param $userAccountId
      * @return Collection
      */
-    public function findByTransactionDateAndUserAccount(string $date, string $userAccountId): Collection
+    public function findByTransactionDateAndUserAccount(string $date, $userAccountId): Collection
     {
         return $this->find([
             'user_account_id' => $userAccountId,

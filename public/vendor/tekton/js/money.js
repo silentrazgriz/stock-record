@@ -1,5 +1,4 @@
-let tektonMoneys = Sizzle('.tekton-money');
-tektonMoneys.forEach((money) => {
+$('.tekton-money').each((index, money) => {
     cleaves.push(new Cleave(money, {
         numeral: true,
         numeralDecimalMark: ',',

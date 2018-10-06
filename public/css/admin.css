@@ -37,5 +37,5 @@
 }
 
 .table thead th.action {
-    width: 200px;
+    max-width: 200px;
 }

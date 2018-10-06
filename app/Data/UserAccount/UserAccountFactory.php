@@ -25,7 +25,7 @@ final class UserAccountFactory
         $userAccount->user_id = $payload['user_id'] ?? Auth::user()->id;
         $userAccount->broker_account_id = $payload['broker_account_id'];
         $userAccount->name = $payload['name'];
-        $userAccount->balance = $payload['balance'];
+        $userAccount->balance = 0;
         $userAccount->balance_updated_at = Carbon::now();
 
         return $userAccount;

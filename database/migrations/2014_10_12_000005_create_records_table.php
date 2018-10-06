@@ -26,10 +26,12 @@ class CreateRecordsTable extends Migration
 
             $table->foreign('user_account_id')
                 ->references('id')
-                ->on('user_accounts');
+                ->on('user_accounts')
+                ->onDelete('cascade');
             $table->foreign('quote_id')
                 ->references('id')
-                ->on('quotes');
+                ->on('quotes')
+                ->onDelete('cascade');
         });
     }
 

@@ -7,7 +7,7 @@
             class="custom-control-input"
             value="{{ $choice['value'] }}"
             {{ $field['options']['value'] == $choice['value'] ||
-                ($field['options']['value'] == null && $choice['checked']) ? 'checked' : '' }}
+                ($field['options']['value'] == null && ($choice['checked'] ?? false)) ? 'checked' : '' }}
         />
         <label class="custom-control-label" for="{{ $field['name'] }}-{{ $index }}">{{ $choice['text'] }}</label>
     </div>

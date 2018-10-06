@@ -1,8 +1,7 @@
-let tektonImageUploads = Sizzle('.tekton-image-upload');
-Array.prototype.filter.call(tektonImageUploads, (imageUpload) => {
-    imageUpload.addEventListener('change', (e) => {
-        let img = Sizzle(imageUpload.dataset.target)[0];
-        let container = Sizzle(imageUpload.dataset.container)[0];
+$('.tekton-image-upload').each((index, imageUpload) => {
+    imageUpload.change((e) => {
+        let img = $(imageUpload.dataset.target)[0];
+        let container = $(imageUpload.dataset.container)[0];
 
         let reader = new FileReader();
         reader.onload = function(e) {

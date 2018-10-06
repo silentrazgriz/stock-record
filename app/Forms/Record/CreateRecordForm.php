@@ -71,9 +71,7 @@ class CreateRecordForm extends Form
      */
     protected function build(array $values = []): void
     {
-        $userAccounts = $this->userAccountRepository->find([
-                ['user_id', Auth::user()->id]
-            ])
+        $userAccounts = $this->userAccountRepository->find(['user_id' => Auth::user()->id])
             ->toArray();
 
         $quotes = $this->quoteRepository->all()
@@ -85,7 +83,8 @@ class CreateRecordForm extends Form
         $this->addField('transaction_date', 'Transaction Date', FieldType::DATE)
             ->setDefaultValue(Carbon::now()->toDateString());
 
-        $this->addField('type', 'Transaction Type', FieldType::SELECT)
+        $this->addField('type', 'Transaction Type', FieldType::RADIO)
+            ->setOptions(['inline' => true])
             ->setChoiceValues([
                 ['text' => 'BUY', 'value' => RecordType::BUY],
                 ['text' => 'SELL', 'value' => RecordType::SELL],

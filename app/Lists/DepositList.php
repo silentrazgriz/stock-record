@@ -15,6 +15,7 @@ final class DepositList extends CollectionList
             'All Deposit',
             [
                 ['key' => 'transaction_at', 'label' => 'Transaction Date', 'type' => 'date'],
+                ['key' => 'user_account.name', 'label' => 'Account', 'type' => 'text'],
                 ['key' => 'net_amount', 'label' => 'Deposit Amount', 'type' => 'number'],
             ],
             [

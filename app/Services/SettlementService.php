@@ -50,12 +50,12 @@ final class SettlementService
     }
 
     /**
-     * @param string $userAccountId
+     * @param $userAccountId
      */
-    public function calculateBalance(string $userAccountId)
+    public function calculateBalance($userAccountId)
     {
         $settlements = $this->settlementRepository->find([
-            ['realized_at', '<=', Carbon::now()->toDateString()],
+            ['settled_at', '<=', Carbon::now()->toDateString()],
             'user_account_id' => $userAccountId
         ]);
 
@@ -80,7 +80,7 @@ final class SettlementService
             'user_account_id'   => $payload['user_account_id'],
             'buy_amount'        => 0,
             'sell_amount'       => 0,
-            'net_amount'        => $payload['amount'],
+            'net_amount'        => $payload['amount'] * ($type == SettlementType::WITHDRAW ? -1 : 1),
             'transaction_at'    => $payload['transaction_at'],
             'settled_at'        => $payload['transaction_at'],
             'settlement_type'   => $type
