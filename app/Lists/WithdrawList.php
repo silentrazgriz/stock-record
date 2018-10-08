@@ -14,7 +14,7 @@ final class WithdrawList extends CollectionList
         parent::__construct(
             'All Withdraw',
             [
-                ['key' => 'transaction_at', 'label' => 'Transaction Date', 'type' => 'date'],
+                ['key' => 'done_at', 'label' => 'Transaction Date', 'type' => 'date'],
                 ['key' => 'net_amount', 'label' => 'Withdraw Amount', 'type' => 'number'],
             ],
             [

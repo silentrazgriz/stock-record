@@ -7,6 +7,7 @@ namespace App\Data\Record;
 
 use App\Component\Value\RecordType;
 use App\Data\UserAccount\UserAccountRepository;
+use Carbon\Carbon;
 
 /**
  * Class RecordFactory
@@ -39,6 +40,12 @@ final class RecordFactory
         $userAccount = $this->userAccountRepository->findById($payload['user_account_id']);
         $totalPrice = $payload['price'] * $payload['total_shares'];
 
+        if (isset($payload['transaction_date'])) {
+            $payload['transaction_date'] = Carbon::parse($payload['transaction_date'])
+                ->setTime(0, 0, 0)
+                ->toDateTimeString();
+        }
+
         $record->user_account_id = $payload['user_account_id'];
         $record->quote_id = $payload['quote_id'];
         $record->price = $payload['price'];
@@ -61,6 +68,12 @@ final class RecordFactory
     {
         $userAccount = $this->userAccountRepository->findById($payload['user_account_id'] ?? $record->user_account_id);
         $totalPrice = ($payload['price'] ?? $record->price) * ($payload['total_shares'] ?? $record->total_shares);
+
+        if (isset($payload['transaction_date'])) {
+            $payload['transaction_date'] = Carbon::parse($payload['transaction_date'])
+                ->setTime(0, 0, 0)
+                ->toDateTimeString();
+        }
 
         $record->user_account_id = $payload['user_account_id'] ?? $record->user_account_id;
         $record->quote_id = $payload['quote_id'] ?? $record->quote_id;

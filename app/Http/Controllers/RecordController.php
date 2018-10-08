@@ -35,33 +35,33 @@ class RecordController extends Controller
     /**
      * @var SummaryService
      */
-    private $calculateSummaryService;
+    private $summaryService;
 
     /**
      * @var SettlementService
      */
-    private $calculateSettlementService;
+    private $settlementService;
 
     /**
      * RecordController constructor.
      * @param RecordRepository $recordRepository
      * @param UserAccountRepository $userAccountRepository
      * @param QuoteRepository $quoteRepository
-     * @param SummaryService $calculateSummaryService
-     * @param SettlementService $calculateSettlementService
+     * @param SummaryService $summaryService
+     * @param SettlementService $settlementService
      */
     public function __construct(
         RecordRepository $recordRepository,
         UserAccountRepository $userAccountRepository,
         QuoteRepository $quoteRepository,
-        SummaryService $calculateSummaryService,
-        SettlementService $calculateSettlementService
+        SummaryService $summaryService,
+        SettlementService $settlementService
     ) {
         $this->recordRepository = $recordRepository;
         $this->userAccountRepository = $userAccountRepository;
         $this->quoteRepository = $quoteRepository;
-        $this->calculateSummaryService = $calculateSummaryService;
-        $this->calculateSettlementService = $calculateSettlementService;
+        $this->summaryService = $summaryService;
+        $this->settlementService = $settlementService;
     }
 
     /**
@@ -92,8 +92,8 @@ class RecordController extends Controller
     {
         $record = $this->recordRepository->create($request->all());
 
-        $this->calculateSummaryService->store($record);
-        $this->calculateSettlementService->storeOrder($record);
+        $this->summaryService->store($record);
+        $this->settlementService->storeOrder($record);
 
         return redirect()->route('records.index');
     }
@@ -106,8 +106,8 @@ class RecordController extends Controller
     {
         $record = $this->recordRepository->findById($id);
 
-        $this->calculateSummaryService->destroy($record);
-        $this->calculateSettlementService->cancelOrder($record);
+        $this->summaryService->destroy($record);
+        $this->settlementService->cancelOrder($record);
 
         $this->recordRepository->destroy($id);
         return redirect()->route('records.index');

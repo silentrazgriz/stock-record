@@ -14,6 +14,6 @@ class Settlement extends Model
     use BelongsToUserAccountTrait;
 
     protected $fillable = [
-        'user_account_id', 'buy_amount', 'sell_amount', 'net_amount', 'transaction_at', 'realization_at', 'is_realized'
+        'user_account_id', 'buy_amount', 'sell_amount', 'net_amount', 'done_at', 'settled_at', 'is_realized'
     ];
 }

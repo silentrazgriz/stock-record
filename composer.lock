@@ -481,12 +481,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silentrazgriz/chiron.git",
-                "reference": "9ce8f86132bfc091eac3d0625158deef84829a50"
+                "reference": "f4d9e20ec4badf23707680d91a77433562a01f09"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silentrazgriz/chiron/zipball/9ce8f86132bfc091eac3d0625158deef84829a50",
-                "reference": "9ce8f86132bfc091eac3d0625158deef84829a50",
+                "url": "https://api.github.com/repos/silentrazgriz/chiron/zipball/f4d9e20ec4badf23707680d91a77433562a01f09",
+                "reference": "f4d9e20ec4badf23707680d91a77433562a01f09",
                 "shasum": ""
             },
             "type": "library",
@@ -513,7 +513,7 @@
                 }
             ],
             "description": "List builder package for laravel",
-            "time": "2018-10-02 18:16:43"
+            "time": "2018-10-06 18:30:52"
         },
         {
             "name": "gaia/tekton",
@@ -521,12 +521,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/silentrazgriz/tekton.git",
-                "reference": "f4f918e41cfbbdda4f95b42f5d3cb0a36a2e8d3c"
+                "reference": "8453b276932d2374da652c4c8e09aca9e77b4783"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/silentrazgriz/tekton/zipball/f4f918e41cfbbdda4f95b42f5d3cb0a36a2e8d3c",
-                "reference": "f4f918e41cfbbdda4f95b42f5d3cb0a36a2e8d3c",
+                "url": "https://api.github.com/repos/silentrazgriz/tekton/zipball/8453b276932d2374da652c4c8e09aca9e77b4783",
+                "reference": "8453b276932d2374da652c4c8e09aca9e77b4783",
                 "shasum": ""
             },
             "type": "library",
@@ -553,7 +553,7 @@
                 }
             ],
             "description": "Form builder package for laravel",
-            "time": "2018-10-06 17:58:36"
+            "time": "2018-10-06 18:24:22"
         },
         {
             "name": "guzzlehttp/guzzle",

@@ -55,7 +55,7 @@ final class SettlementService
     public function calculateBalance($userAccountId)
     {
         $settlements = $this->settlementRepository->find([
-            ['settled_at', '<=', Carbon::now()->toDateString()],
+            ['settled_at', '<=', Carbon::now()->toDateTimeString()],
             'user_account_id' => $userAccountId
         ]);
 
@@ -81,8 +81,8 @@ final class SettlementService
             'buy_amount'        => 0,
             'sell_amount'       => 0,
             'net_amount'        => $payload['amount'] * ($type == SettlementType::WITHDRAW ? -1 : 1),
-            'transaction_at'    => $payload['transaction_at'],
-            'settled_at'        => $payload['transaction_at'],
+            'done_at'    => $payload['done_at'],
+            'settled_at'        => $payload['done_at'],
             'settlement_type'   => $type
         ]);
 
@@ -118,7 +118,7 @@ final class SettlementService
                 'buy_amount'        => $detail['buy_amount'],
                 'sell_amount'       => $detail['sell_amount'],
                 'net_amount'        => $detail['net_amount'],
-                'transaction_at'    => $record->transaction_date,
+                'done_at'    => $record->transaction_date,
                 'settled_at'        => $this->getSettlementDate($record->transaction_date),
                 'settlement_type'   => SettlementType::ORDER
             ]);
@@ -175,7 +175,7 @@ final class SettlementService
             }
         }
 
-        return $settlementDate->toDateString();
+        return $settlementDate->toDateTimeString();
     }
 
     /**
@@ -191,9 +191,9 @@ final class SettlementService
         ];
 
         if ($record->type == RecordType::BUY) {
-            $result['buy_amount'] = ($record->price * $record->total_shares) + $record->broker_fee;
+            $result['buy_amount'] = ceil(($record->price * $record->total_shares) + $record->broker_fee);
         } else {
-            $result['sell_amount'] = ($record->price * $record->total_shares) - $record->broker_fee;
+            $result['sell_amount'] = ceil(($record->price * $record->total_shares) - $record->broker_fee);
         }
 
         $result['net_amount'] = $result['sell_amount'] - $result['buy_amount'];

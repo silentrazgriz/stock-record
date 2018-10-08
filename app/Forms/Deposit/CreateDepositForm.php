@@ -55,7 +55,7 @@ final class CreateDepositForm extends Form
         $this->addField('user_account_id', 'Account', FieldType::SELECT)
             ->setChoiceValues(ChoiceValueParser::parse($userAccounts, 'name', 'id'));
 
-        $this->addField('transaction_at', 'Transaction Date', FieldType::DATE)
+        $this->addField('done_at', 'Transaction Date', FieldType::DATE)
             ->setPlaceholder('Transaction Date')
             ->setDefaultValue(Carbon::now()->toDateString());
 

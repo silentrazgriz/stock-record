@@ -15,58 +15,58 @@ final class SettlementFactory
      */
     public function create(array $payload): Settlement
     {
-        $realization = new Settlement();
+        $settlement = new Settlement();
 
-        if (isset($payload['transaction_at'])) {
-            $payload['transaction_at'] = Carbon::parse($payload['transaction_at'])
+        if (isset($payload['done_at'])) {
+            $payload['done_at'] = Carbon::parse($payload['done_at'])
                 ->setTime(0, 0, 0)
-                ->toDateString();
+                ->toDateTimeString();
         }
         if (isset($payload['settled_at'])) {
             $payload['settled_at'] = Carbon::parse($payload['settled_at'])
                 ->setTime(0, 0, 0)
-                ->toDateString();
+                ->toDateTimeString();
         }
 
-        $realization->user_account_id = $payload['user_account_id'];
-        $realization->buy_amount = $payload['buy_amount'];
-        $realization->sell_amount = $payload['sell_amount'];
-        $realization->net_amount = $payload['net_amount'];
-        $realization->transaction_at = $payload['transaction_at'];
-        $realization->settled_at = $payload['settled_at'];
-        $realization->settlement_type = $payload['settlement_type'];
-        $realization->is_realized = $payload['is_realized'] ?? false;
+        $settlement->user_account_id = $payload['user_account_id'];
+        $settlement->buy_amount = $payload['buy_amount'];
+        $settlement->sell_amount = $payload['sell_amount'];
+        $settlement->net_amount = $payload['net_amount'];
+        $settlement->done_at = $payload['done_at'];
+        $settlement->settled_at = $payload['settled_at'];
+        $settlement->settlement_type = $payload['settlement_type'];
+        $settlement->is_realized = $payload['is_realized'] ?? false;
 
-        return $realization;
+        return $settlement;
     }
 
     /**
-     * @param Settlement $realization
+     * @param Settlement $settlement
      * @param array $payload
      * @return Settlement
      */
-    public function update(Settlement $realization, array $payload): Settlement
+    public function update(Settlement $settlement, array $payload): Settlement
     {
-        if (isset($payload['transaction_at'])) {
-            $payload['transaction_at'] = Carbon::parse($payload['transaction_at'])
+        if (isset($payload['done_at'])) {
+            $payload['done_at'] = Carbon::parse($payload['done_at'])
                 ->setTime(0, 0, 0)
-                ->toDateString();
+                ->toDateTimeString();
         }
         if (isset($payload['settled_at'])) {
             $payload['settled_at'] = Carbon::parse($payload['settled_at'])
                 ->setTime(0, 0, 0)
-                ->toDateString();
+                ->toDateTimeString();
         }
+        
+        $settlement->user_account_id = $payload['user_account_id'] ?? $settlement->user_account_id;
+        $settlement->buy_amount = $payload['buy_amount'] ?? $settlement->buy_amount;
+        $settlement->sell_amount = $payload['sell_amount'] ?? $settlement->sell_amount;
+        $settlement->net_amount = $payload['net_amount'] ?? $settlement->net_amount;
+        $settlement->done_at = $payload['done_at'] ?? $settlement->done_at;
+        $settlement->settled_at = $payload['settled_at'] ?? $settlement->settled_at;
+        $settlement->settlement_type = $payload['settlement_type'] ?? $settlement->settlement_type;
+        $settlement->is_realized = $payload['is_realized'] ?? $settlement->is_realized;
 
-        $realization->user_account_id = $payload['user_account_id'] ?? $realization->user_account_id;
-        $realization->buy_amount = $payload['buy_amount'] ?? $realization->buy_amount;
-        $realization->sell_amount = $payload['sell_amount'] ?? $realization->sell_amount;
-        $realization->net_amount = $payload['net_amount'] ?? $realization->net_amount;
-        $realization->transaction_at = $payload['transaction_at'] ?? $realization->transaction_at;
-        $realization->settled_at = $payload['settled_at'] ?? $realization->realization_at;
-        $realization->settlement_type = $payload['settlement_type'] ?? $realization->settlement_type;
-        $realization->is_realized = $payload['is_realized'] ?? $realization->is_realized;
-
-        return $realization;
+        return $settlement;
     }
 }

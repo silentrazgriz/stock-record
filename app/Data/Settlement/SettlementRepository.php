@@ -80,7 +80,7 @@ class SettlementRepository extends Repository
     {
         return $this->find([
             'user_account_id' => $userAccountId,
-            'transaction_at' => $date,
+            'done_at' => $date,
         ]);
     }
 
@@ -90,10 +90,10 @@ class SettlementRepository extends Repository
      */
     public function create(array $payload): Settlement
     {
-        $realization = $this->factory->create($payload);
-        $realization->save();
+        $settlement = $this->factory->create($payload);
+        $settlement->save();
 
-        return $realization;
+        return $settlement;
     }
 
     /**
@@ -103,13 +103,14 @@ class SettlementRepository extends Repository
      */
     public function update($id, array $payload): Settlement
     {
-        $realization = $this->factory->update(
+        $settlement = $this->factory->update(
             $this->findById($id),
             $payload
         );
-        $realization->save();
 
-        return $realization;
+        $settlement->save();
+
+        return $settlement;
     }
 
     /**

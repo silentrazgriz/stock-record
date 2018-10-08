@@ -49,7 +49,15 @@ class DashboardController
             return redirect('login');
         }
 
-        $user = $this->userRepository->findById(Auth::user()->id, ['userAccounts.summaries.quote', 'userAccounts.brokerAccount'])
+        $user = $this->userRepository->findById(
+                Auth::user()->id,
+                [
+                    'userAccounts.summaries.quote',
+                    'userAccounts.brokerAccount',
+                    'userAccounts.settlements',
+                    'userAccounts.margins'
+                ]
+            )
             ->toArray();
 
         return view('dashboard', [
