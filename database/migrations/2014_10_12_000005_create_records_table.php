@@ -21,7 +21,7 @@ class CreateRecordsTable extends Migration
             $table->unsignedBigInteger('total_shares');
             $table->unsignedBigInteger('broker_fee');
             $table->enum('type', ['BUY', 'SELL']);
-            $table->timestamp('transaction_date');
+            $table->timestamp('transaction_date')->nullable();
             $table->timestamps();
 
             $table->foreign('user_account_id')

@@ -16,8 +16,8 @@ class CreateSettlementsTable extends Migration
         Schema::create('settlements', function (Blueprint $table) {
             $table->increments('id');
             $table->unsignedInteger('user_account_id');
-            $table->timestamp('done_at');
-            $table->timestamp('settled_at');
+            $table->timestamp('done_at')->nullable();
+            $table->timestamp('settled_at')->nullable();
             $table->bigInteger('buy_amount');
             $table->bigInteger('sell_amount');
             $table->bigInteger('net_amount');

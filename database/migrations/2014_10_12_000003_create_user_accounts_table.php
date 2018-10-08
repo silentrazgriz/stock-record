@@ -19,7 +19,7 @@ class CreateUserAccountsTable extends Migration
             $table->unsignedInteger('broker_account_id');
             $table->string('name');
             $table->bigInteger('balance');
-            $table->timestamp('balance_updated_at');
+            $table->timestamp('balance_updated_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

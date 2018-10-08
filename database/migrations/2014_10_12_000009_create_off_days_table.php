@@ -15,7 +15,7 @@ class CreateOffDaysTable extends Migration
     {
         Schema::create('off_days', function (Blueprint $table) {
             $table->increments('id');
-            $table->timestamp('off_date');
+            $table->timestamp('off_date')->nullable();
         });
     }
 
