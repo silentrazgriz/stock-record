@@ -7,7 +7,6 @@ namespace App\Http\Controllers;
 
 use App\Component\Value\DateParser;
 use App\Data\Summary\SummaryRepository;
-use App\Data\User\User;
 use App\Data\User\UserRepository;
 use App\Services\SettlementService;
 use Carbon\Carbon;
