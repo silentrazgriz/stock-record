@@ -4,10 +4,8 @@
         {{ $account['name'] }}
     </div>
     <div class="card-body">
-        <table class="table table-hover mb-2">
-            @include('components.rows.title')
-            @include('components.rows.content')
-        </table>
+        @include('components.stock')
+        @include('components.settlement')
     </div>
 </div>
 @endforeach

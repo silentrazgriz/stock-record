@@ -5,7 +5,7 @@ declare(strict_types=1);
 
 namespace App\Data\Settlement;
 
-use Carbon\Carbon;
+use App\Component\Value\DateParser;
 
 final class SettlementFactory
 {
@@ -18,14 +18,10 @@ final class SettlementFactory
         $settlement = new Settlement();
 
         if (isset($payload['done_at'])) {
-            $payload['done_at'] = Carbon::parse($payload['done_at'])
-                ->setTime(0, 0, 0)
-                ->toDateTimeString();
+            $payload['done_at'] = DateParser::parse($payload['done_at']);
         }
         if (isset($payload['settled_at'])) {
-            $payload['settled_at'] = Carbon::parse($payload['settled_at'])
-                ->setTime(0, 0, 0)
-                ->toDateTimeString();
+            $payload['settled_at'] = DateParser::parse($payload['settled_at']);
         }
 
         $settlement->user_account_id = $payload['user_account_id'];
@@ -48,14 +44,10 @@ final class SettlementFactory
     public function update(Settlement $settlement, array $payload): Settlement
     {
         if (isset($payload['done_at'])) {
-            $payload['done_at'] = Carbon::parse($payload['done_at'])
-                ->setTime(0, 0, 0)
-                ->toDateTimeString();
+            $payload['done_at'] = DateParser::parse($payload['done_at']);
         }
         if (isset($payload['settled_at'])) {
-            $payload['settled_at'] = Carbon::parse($payload['settled_at'])
-                ->setTime(0, 0, 0)
-                ->toDateTimeString();
+            $payload['settled_at'] = DateParser::parse($payload['settled_at']);
         }
         
         $settlement->user_account_id = $payload['user_account_id'] ?? $settlement->user_account_id;

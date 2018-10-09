@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Services;
 
+use App\Component\Value\DateParser;
 use App\Component\Value\RecordType;
 use App\Component\Value\SettlementType;
 use App\Data\Margin\MarginRepository;
@@ -81,7 +82,7 @@ final class SettlementService
             'buy_amount'        => 0,
             'sell_amount'       => 0,
             'net_amount'        => $payload['amount'] * ($type == SettlementType::WITHDRAW ? -1 : 1),
-            'done_at'    => $payload['done_at'],
+            'done_at'           => $payload['done_at'],
             'settled_at'        => $payload['done_at'],
             'settlement_type'   => $type
         ]);
@@ -118,7 +119,7 @@ final class SettlementService
                 'buy_amount'        => $detail['buy_amount'],
                 'sell_amount'       => $detail['sell_amount'],
                 'net_amount'        => $detail['net_amount'],
-                'done_at'    => $record->transaction_date,
+                'done_at'           => $record->transaction_date,
                 'settled_at'        => $this->getSettlementDate($record->transaction_date),
                 'settlement_type'   => SettlementType::ORDER
             ]);
@@ -164,7 +165,7 @@ final class SettlementService
      * @param string $currentDate
      * @return string
      */
-    private function getSettlementDate(string $currentDate)
+    public function getSettlementDate(string $currentDate)
     {
         $settlementDate = Carbon::parse($currentDate);
         $i = 0;
@@ -175,7 +176,35 @@ final class SettlementService
             }
         }
 
-        return $settlementDate->toDateTimeString();
+        return DateParser::parse($settlementDate->toDateTimeString());
+    }
+
+    /**
+     * @param string $startDate
+     * @return array
+     */
+    public function getRecentSettlementDates(string $startDate): array
+    {
+        $result = [];
+        $date = Carbon::parse($startDate)
+            ->setTime(0, 0, 0);
+
+        $i = 0;
+        while ($i < 4) {
+            if ($date->isWeekday()) {
+                $result[$date->toDateString()] = [
+                    'income' => 0,
+                    'outcome' => 0,
+                    'margin' => 0,
+                    'net' => 0,
+                    'total' => 0
+                ];
+                $i++;
+            }
+            $date->addDay();
+        }
+
+        return $result;
     }
 
     /**

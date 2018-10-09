@@ -7,6 +7,7 @@ namespace App\Data\Settlement;
 
 
 use App\Component\Repository\Repository;
+use App\Component\Value\SettlementType;
 use Carbon\Carbon;
 use Illuminate\Support\Collection;
 use Exception;
@@ -35,7 +36,7 @@ class SettlementRepository extends Repository
     public function all(array $with = []): Collection
     {
         return Settlement::with($with)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('settled_at', 'desc')
             ->get();
     }
 
@@ -67,8 +68,23 @@ class SettlementRepository extends Repository
     {
         return Settlement::where($condition)
             ->with($with)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('settled_at', 'desc')
             ->get();
+    }
+
+    /**
+     * @param string $startDate
+     * @param string $endDate
+     * @param $userAccountId
+     * @return Collection
+     */
+    public function findBetweenDateAndUserAccount(string $startDate, string $endDate, $userAccountId)
+    {
+        return $this->find([
+            'user_account_id' => $userAccountId,
+            ['settled_at', '>=', $startDate],
+            ['settled_at', '<=', $endDate]
+        ]);
     }
 
     /**
@@ -81,6 +97,7 @@ class SettlementRepository extends Repository
         return $this->find([
             'user_account_id' => $userAccountId,
             'done_at' => $date,
+            'settlement_type' => SettlementType::ORDER
         ]);
     }
 

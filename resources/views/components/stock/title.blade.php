@@ -6,6 +6,7 @@
     <th class="text-right" scope="col">Shares</th>
     <th class="text-right" scope="col">Buy Fee</th>
     <th class="text-right" scope="col">Est. Sell Fee</th>
+    <th class="text-right" scope="col">Buy Value</th>
     <th class="text-right" scope="col">Current Value</th>
     <th class="text-right" scope="col">G/L</th>
     <th class="text-right" scope="col">%G/L</th>

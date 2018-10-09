@@ -5,9 +5,9 @@ declare(strict_types=1);
 
 namespace App\Data\Record;
 
+use App\Component\Value\DateParser;
 use App\Component\Value\RecordType;
 use App\Data\UserAccount\UserAccountRepository;
-use Carbon\Carbon;
 
 /**
  * Class RecordFactory
@@ -41,9 +41,7 @@ final class RecordFactory
         $totalPrice = $payload['price'] * $payload['total_shares'];
 
         if (isset($payload['transaction_date'])) {
-            $payload['transaction_date'] = Carbon::parse($payload['transaction_date'])
-                ->setTime(0, 0, 0)
-                ->toDateTimeString();
+            $payload['transaction_date'] = DateParser::parse($payload['transaction_date']);
         }
 
         $record->user_account_id = $payload['user_account_id'];
@@ -70,9 +68,7 @@ final class RecordFactory
         $totalPrice = ($payload['price'] ?? $record->price) * ($payload['total_shares'] ?? $record->total_shares);
 
         if (isset($payload['transaction_date'])) {
-            $payload['transaction_date'] = Carbon::parse($payload['transaction_date'])
-                ->setTime(0, 0, 0)
-                ->toDateTimeString();
+            $payload['transaction_date'] = DateParser::parse($payload['transaction_date']);
         }
 
         $record->user_account_id = $payload['user_account_id'] ?? $record->user_account_id;
