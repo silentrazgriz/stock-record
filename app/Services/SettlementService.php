@@ -50,6 +50,20 @@ final class SettlementService
         $this->userAccountRepository = $userAccountRepository;
     }
 
+    public function calculateAllBalance()
+    {
+        $userAccounts = $this->userAccountRepository->find([
+            ['balance_updated_at', '<', Carbon::now()]
+        ]);
+
+        $i = 0;
+        foreach ($userAccounts as $userAccount) {
+            if ($i == 5) break;
+            $this->calculateBalance($userAccount->id);
+            $i++;
+        }
+    }
+
     /**
      * @param $userAccountId
      */
@@ -69,6 +83,16 @@ final class SettlementService
             'balance'               => $balance,
             'balance_updated_at'    => Carbon::now()
         ]);
+
+        if ($balance < 0) {
+            $userAccount = $this->userAccountRepository->findById($userAccountId);
+
+            $this->marginRepository->create([
+                'user_account_id'   => $userAccountId,
+                'total_margin'      => $balance,
+                'total_interest'    => $balance * $userAccount->brokerAccount->margin_interest / 100
+            ]);
+        }
     }
 
     /**

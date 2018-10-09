@@ -14,6 +14,7 @@
 Auth::routes();
 
 Route::get('/', 'DashboardController@index')->name('root');
+Route::get('set-user-account/{user-account}', 'DashboardController@setUserAccount');
 
 Route::resource('broker-accounts', 'BrokerAccountController');
 Route::resource('user-accounts', 'UserAccountController');

@@ -39,3 +39,25 @@
 .table thead th.action {
     max-width: 200px;
 }
+
+#select2-select-user-account-container {
+    font-size: 0.85em !important;
+    line-height: 1.8 !important;
+    padding: 0 .4rem;
+}
+
+#select-user-account + .select2-container {
+    min-width: 200px !important;
+}
+
+#select-user-account + .select2-container .select2-selection--single {
+    height: auto !important;
+}
+
+#select-user-account + .select2-container .select2-selection--single .select2-selection__arrow {
+    height: 100% !important;
+}
+
+#select2-select-user-account-results {
+    font-size: 0.85em !important;
+}

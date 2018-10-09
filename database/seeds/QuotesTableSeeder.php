@@ -4,12 +4,13 @@ use GuzzleHttp\Client;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
+/**
+ * Class QuotesTableSeeder
+ */
 class QuotesTableSeeder extends Seeder
 {
     /**
-     * Run the database seeds.
-     *
-     * @return void
+     * @throws \GuzzleHttp\Exception\GuzzleException
      */
     public function run()
     {
@@ -35,6 +36,9 @@ class QuotesTableSeeder extends Seeder
         DB::table('quotes')->insert($inserted);
     }
 
+    /**
+     * @return string
+     */
     public function getSummaryUrl() {
         return 'http://www.idx.co.id/umbraco/Surface/TradingSummary/GetStockSummary?draw=1&start=0&length=700';
     }

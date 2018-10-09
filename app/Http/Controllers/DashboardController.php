@@ -12,6 +12,7 @@ use App\Services\SettlementService;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 
 /**
  * Class DashboardController
@@ -51,10 +52,9 @@ class DashboardController
     }
 
     /**
-     * @param Request $request
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector|\Illuminate\View\View
      */
-    public function index(Request $request)
+    public function index()
     {
         if(Auth::guest()) {
             return redirect('login');
@@ -84,6 +84,16 @@ class DashboardController
         return view('dashboard', [
             'user' => $user
         ]);
+    }
+
+    /**
+     * @param $userAccount
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function setUserAccount($userAccount)
+    {
+        Cookie::make('user-account-id', $userAccount);
+        return response()->json(['message' => 'success']);
     }
 
     /**

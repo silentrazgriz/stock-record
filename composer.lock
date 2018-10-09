@@ -513,7 +513,7 @@
                 }
             ],
             "description": "List builder package for laravel",
-            "time": "2018-10-06 18:30:52"
+            "time": "2018-10-06T18:30:52+00:00"
         },
         {
             "name": "gaia/tekton",
@@ -553,7 +553,7 @@
                 }
             ],
             "description": "Form builder package for laravel",
-            "time": "2018-10-06 18:24:22"
+            "time": "2018-10-06T18:24:22+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",

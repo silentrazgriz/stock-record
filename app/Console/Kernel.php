@@ -2,9 +2,17 @@
 
 namespace App\Console;
 
+use App\Services\QuoteService;
+use App\Services\SettlementService;
 use Illuminate\Console\Scheduling\Schedule;
+use Illuminate\Contracts\Events\Dispatcher;
+use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
+/**
+ * Class Kernel
+ * @package App\Console
+ */
 class Kernel extends ConsoleKernel
 {
     /**
@@ -17,6 +25,34 @@ class Kernel extends ConsoleKernel
     ];
 
     /**
+     * @var QuoteService
+     */
+    private $quoteService;
+
+    /**
+     * @var SettlementService
+     */
+    private $settlementService;
+
+    /**
+     * Kernel constructor.
+     * @param Application $app
+     * @param Dispatcher $events
+     * @param QuoteService $quoteService
+     * @param SettlementService $settlementService
+     */
+    public function __construct(
+        Application $app,
+        Dispatcher $events,
+        QuoteService $quoteService,
+        SettlementService $settlementService
+    ) {
+        parent::__construct($app, $events);
+        $this->quoteService = $quoteService;
+        $this->settlementService = $settlementService;
+    }
+
+    /**
      * Define the application's command schedule.
      *
      * @param  \Illuminate\Console\Scheduling\Schedule  $schedule
@@ -24,8 +60,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')
-        //          ->hourly();
+        $schedule->call(function() {
+            $this->quoteService->updateQuote();
+        })->dailyAt('18:00');
+
+        $schedule->call(function() {
+            $this->settlementService->calculateAllBalance();
+        })->everyTenMinutes()->between('23:00', '03:00');
     }
 
     /**
