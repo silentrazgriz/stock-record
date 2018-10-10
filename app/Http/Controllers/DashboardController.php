@@ -10,9 +10,8 @@ use App\Data\Summary\SummaryRepository;
 use App\Data\User\UserRepository;
 use App\Services\SettlementService;
 use Carbon\Carbon;
-use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Cookie;
 
 /**
  * Class DashboardController
@@ -88,12 +87,13 @@ class DashboardController
 
     /**
      * @param $userAccount
-     * @return \Illuminate\Http\JsonResponse
+     * @return Response
      */
     public function setUserAccount($userAccount)
     {
-        Cookie::make('user-account-id', $userAccount);
-        return response()->json(['message' => 'success']);
+        session()->put('user-account-id', $userAccount);
+        session()->save();
+        return response()->json(['message' => 'ok']);
     }
 
     /**

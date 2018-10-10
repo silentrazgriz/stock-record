@@ -8,6 +8,7 @@ use App\Forms\UserAccount\CreateUserAccountForm;
 use App\Forms\UserAccount\UpdateUserAccountForm;
 use App\Lists\UserAccountList;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Class UserAccountController
@@ -44,7 +45,7 @@ class UserAccountController extends Controller
     public function index()
     {
         $list = new UserAccountList();
-        $list->setCollection($this->userAccountRepository->all(['brokerAccount']));
+        $list->setCollection($this->userAccountRepository->find(['user_id' => Auth::id()], ['brokerAccount']));
 
         return $list->render();
     }

@@ -81,6 +81,7 @@ class RecordController extends Controller
     public function create()
     {
         $createForm = new CreateRecordForm($this->userAccountRepository, $this->quoteRepository);
+        $createForm->setDefaultValues(['user_account_id' => session()->get('user-account-id')]);
         return $createForm->render();
     }
 

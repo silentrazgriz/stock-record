@@ -59,6 +59,7 @@ class WithdrawController extends Controller
     public function create()
     {
         $createForm = new CreateWithdrawForm($this->userAccountRepository);
+        $createForm->setDefaultValues(['user_account_id' => session()->get('user-account-id')]);
         return $createForm->render();
     }
 

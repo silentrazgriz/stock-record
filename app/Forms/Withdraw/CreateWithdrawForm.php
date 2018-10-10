@@ -53,7 +53,8 @@ final class CreateWithdrawForm extends Form
             ->toArray();
 
         $this->addField('user_account_id', 'Account', FieldType::SELECT)
-            ->setChoiceValues(ChoiceValueParser::parse($userAccounts, 'name', 'id'));
+            ->setChoiceValues(ChoiceValueParser::parse($userAccounts, 'name', 'id'))
+            ->setDefaultValue($values['user_account_id'] ?? $userAccounts[0]['id']);
 
         $this->addField('done_at', 'Transaction Date', FieldType::DATE)
             ->setPlaceholder('Transaction Date')

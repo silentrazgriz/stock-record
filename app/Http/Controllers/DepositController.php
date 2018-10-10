@@ -63,6 +63,7 @@ class DepositController extends Controller
     public function create()
     {
         $createForm = new CreateDepositForm($this->userAccountRepository);
+        $createForm->setDefaultValues(['user_account_id' => session()->get('user-account-id')]);
         return $createForm->render();
     }
 

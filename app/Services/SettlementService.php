@@ -53,7 +53,7 @@ final class SettlementService
     public function calculateAllBalance()
     {
         $userAccounts = $this->userAccountRepository->find([
-            ['balance_updated_at', '<', Carbon::now()]
+            ['balance_updated_at', '<', Carbon::now()->subHours(5)]
         ]);
 
         $i = 0;

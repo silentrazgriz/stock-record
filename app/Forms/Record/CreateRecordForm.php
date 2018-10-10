@@ -78,7 +78,8 @@ class CreateRecordForm extends Form
             ->toArray();
 
         $this->addField('user_account_id', 'Account', FieldType::SELECT)
-            ->setChoiceValues(ChoiceValueParser::parse($userAccounts, 'name', 'id'));
+            ->setChoiceValues(ChoiceValueParser::parse($userAccounts, 'name', 'id'))
+            ->setDefaultValue($values['user_account_id'] ?? $userAccounts[0]['id']);
 
         $this->addField('transaction_date', 'Transaction Date', FieldType::DATE)
             ->setDefaultValue(Carbon::now()->toDateString());
